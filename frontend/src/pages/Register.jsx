@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import BannerLogin from "../component/Login/BannerLogin";
-import RegisterForm from "../component/login/RegisterForm";
+import RegisterForm from "../component/Login/RegisterForm";
 
 export default function Register() {
   const location = useLocation();
