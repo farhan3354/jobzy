@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import Swal from "sweetalert2";
+import api from "./../../api/register";
 
 export default function RegisterForm() {
   const {
@@ -23,7 +23,7 @@ export default function RegisterForm() {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("http://localhost:8000/register", data);
+      const res = await api.post("/register", data);
       // console.log("Register Data Submitted:", res.data);
 
       Swal.fire({

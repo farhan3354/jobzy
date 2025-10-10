@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../api/register";
 import Swal from "sweetalert2";
 
 export default function OTPVerifyForm() {
@@ -17,7 +17,7 @@ export default function OTPVerifyForm() {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("http://localhost:8000/verify-otp", {
+      const res = await api.post("/verify-otp", {
         email,
         otp: data.otp,
       });

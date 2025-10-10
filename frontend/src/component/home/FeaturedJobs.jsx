@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import JobCard from "./JobCard";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from "../../api/register";
 
 export default function FeaturedJobs() {
   const [jobs, setJobs] = useState([]);
@@ -13,7 +13,7 @@ export default function FeaturedJobs() {
   useEffect(() => {
     const getAllJobs = async () => {
       try {
-        const resp = await axios.get("http://localhost:8000/get-alljobs");
+        const resp = await api.get("/get-alljobs");
         setJobs(resp.data.jobs || []);
       } catch (error) {
         console.log("Error getting data", error);

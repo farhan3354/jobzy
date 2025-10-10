@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import BlogCard from "./BlogCard";
-import axios from "axios";
+import api from "../api/register";
 import { FaSearch, FaFilter } from "react-icons/fa";
 import BlogLoadingSkeleton from "./BlogLoadingSkeleton";
 
@@ -14,7 +14,7 @@ export default function BlogPage() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/blog");
+        const res = await api.get("/api/blog");
         setBlogs(res.data.blog || []);
       } catch (err) {
         setError(err.message || "Failed to fetch blogs");
