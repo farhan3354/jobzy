@@ -20,7 +20,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://jobzy-seven.vercel.app/",
     optionsSuccessStatus: 200,
     credentials: true,
   })
