@@ -1,5 +1,5 @@
 import React from "react";
-import RegistrationSelectionPage from "../component/login/RegistationRole";
+import RegistrationSelectionPage from "../component/Login/RegistationRole";
 
 export default function ChoseRole() {
   return (
