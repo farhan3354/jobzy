@@ -1,10 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { loginsucc } from "../../redux/slices/authslices/userslice";
+import api from "../../api/register";
 
 export default function Form() {
   const {
@@ -18,7 +18,7 @@ export default function Form() {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("https://job-portal-xi-dun.vercel.app/login", data);
+      const res = await api.post("/login", data);
       if (res.data && res.data.message) {
         // console.log("Login Successfully:", data, res);
         dispatch(loginsucc(res.data));
