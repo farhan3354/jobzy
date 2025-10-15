@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import api from "../api/register";
 
 export default function FindByIdBlog() {
   const { id } = useParams();
@@ -11,7 +11,7 @@ export default function FindByIdBlog() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/api/blog/${id}`);
+        const res = await api.get(`/api/blog/${id}`);
         setBlog(res.data.blog);
         setLoading(false);
       } catch (err) {

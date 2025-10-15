@@ -1,8 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
 import BlogCard from "./BlogCard";
-import api from "../api/register";
 import { FaSearch, FaFilter } from "react-icons/fa";
 import BlogLoadingSkeleton from "./BlogLoadingSkeleton";
+import api from "../api/register";
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState([]);

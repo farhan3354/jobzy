@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import JobCard from "./JobCard";
 import { Link } from "react-router-dom";
-import api from "../../api/register";
+import api from "./../../api/register";
 
 export default function FeaturedJobs() {
   const [jobs, setJobs] = useState([]);

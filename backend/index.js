@@ -20,7 +20,17 @@ const app = express();
 const port = process.env.PORT || 4000;
 app.use(
   cors({
-    origin: "https://jobzy-seven.vercel.app",
+    origin: function (origin, callback) {
+      const allowed = [
+        "https://jobzy-seven.vercel.app",
+        "http://localhost:5173",
+      ];
+      if (!origin || allowed.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     optionsSuccessStatus: 200,
     credentials: true,
   })

@@ -20,7 +20,7 @@ export default function AdminDashboard() {
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:8000/alldetails", {
+      const response = await axios.get("http://localhost:8000/alldetails ", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
