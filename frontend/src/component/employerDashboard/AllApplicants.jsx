@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useSelector } from "react-redux";
+import api from "../../api/register";
 
 const AllApplicants = () => {
   const [jobs, setJobs] = useState([]);
@@ -13,7 +13,7 @@ const AllApplicants = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/get-jobs", {
+        const res = await api.get("/get-jobs", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setJobs(res.data.jobs);

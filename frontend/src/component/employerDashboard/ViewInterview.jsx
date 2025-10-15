@@ -10,9 +10,9 @@ import {
   FiFilter,
 } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { LuNotebookPen } from "react-icons/lu";
+import api from "../../api/register";
 
 const ViewInterview = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const ViewInterview = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/getinterview`, {
+      const response = await api.get(`/getinterview`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setInterviews(response.data.intervi || []);

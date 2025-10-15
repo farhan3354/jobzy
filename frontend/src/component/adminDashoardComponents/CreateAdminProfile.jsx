@@ -1,7 +1,7 @@
-import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import api from "../../api/register";
 
 export default function CreateAdminProfile() {
   const {
@@ -21,8 +21,8 @@ export default function CreateAdminProfile() {
         formData.append("profileImage", data.profileImage[0]);
       }
 
-      const res = await axios.post(
-        "http://localhost:8000/adminProfile",
+      const res = await api.post(
+        "/adminProfile",
         formData,
         {
           headers: {

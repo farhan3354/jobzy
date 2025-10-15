@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   FaEye,
@@ -14,6 +13,7 @@ import {
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import api from "../../api/register";
 
 export default function CheckJobs() {
   const [jobs, setJobs] = useState([]);
@@ -22,7 +22,7 @@ export default function CheckJobs() {
   const token = useSelector((state) => state.auth.token);
   const fetchadminjobs = async () => {
     try {
-      const respo = await axios.get("http://localhost:8000/getalljobs", {
+      const respo = await api.get("/getalljobs", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setJobs(respo.data.jobs || null);
@@ -49,8 +49,8 @@ export default function CheckJobs() {
 
     if (result.isConfirmed) {
       try {
-        const response = await axios.delete(
-          `http://localhost:8000/remove/${jobId}`,
+        const response = await api.delete(
+          `/remove/${jobId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -68,8 +68,8 @@ export default function CheckJobs() {
 
   const handleStatusChange = async (jobId, status) => {
     try {
-      const res = await axios.put(
-        `http://localhost:8000/update-job-status/${jobId}`,
+      const res = await api.put(
+        `/update-job-status/${jobId}`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );

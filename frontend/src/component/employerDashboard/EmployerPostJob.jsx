@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import StepOne from "./postJobForm/StepOne";
 import StepTwo from "./postJobForm/StepTwo";
 import StepThree from "./postJobForm/StepThree";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import api from "../../api/register";
 
 export default function EmployerPostJob() {
   const {
@@ -34,8 +34,8 @@ export default function EmployerPostJob() {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/post-job",
+      const response = await api.post(
+        "/post-job",
         formattedData,
         {
           headers: {

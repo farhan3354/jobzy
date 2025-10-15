@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import api from "../../api/register";
 
 export default function Apply() {
   const {
@@ -16,8 +16,8 @@ export default function Apply() {
   const navigate = useNavigate();
   const applyformdata = async (data) => {
     try {
-      const respo = await axios.post(
-        `http://localhost:8000/apply/${id}`,
+      const respo = await api.post(
+        `/apply/${id}`,
         data,
         {
           headers: {

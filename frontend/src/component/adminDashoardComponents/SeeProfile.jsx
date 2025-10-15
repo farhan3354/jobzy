@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   FaUser,
@@ -15,6 +14,7 @@ import { MdDateRange } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ChangePassword from "./ChangePassword";
+import api from "../../api/register";
 
 export default function SeeProfile() {
   const [profileData, setProfileData] = useState(null);
@@ -26,7 +26,7 @@ export default function SeeProfile() {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get("http://localhost:8000/admin", {
+      const response = await api.get("/admin", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProfileData(response.data.profile);

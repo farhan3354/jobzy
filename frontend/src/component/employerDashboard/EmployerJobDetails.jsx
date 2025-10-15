@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { MdOutlineWork } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import api from "../../api/register";
 
 export default function EmployerJobDetails() {
   const { id } = useParams();
@@ -13,7 +13,7 @@ export default function EmployerJobDetails() {
 
   const fetchJobDetails = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/get-job/${id}`, {
+      const res = await api.get(`/get-job/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setJob(res.data.job);

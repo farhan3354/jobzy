@@ -2,9 +2,9 @@ import React from "react";
 import { MdWorkOutline, MdPeople, MdOutlineBarChart } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import api from "../../api/register";
 
 export default function EmployerDashboard() {
   const stats = [
@@ -35,7 +35,7 @@ export default function EmployerDashboard() {
 
   const fetchdatejob = async () => {
     try {
-      const respo = await axios.get("http://localhost:8000/employerjob", {
+      const respo = await api.get("/employerjob", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setjob(respo.data.job || null);

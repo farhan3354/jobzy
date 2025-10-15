@@ -1,7 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FiCalendar, FiClock, FiUser, FiVideo, FiMapPin } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import api from "../../api/register";
 
 const InterviewPage = () => {
   const [interviews, setinterview] = useState([]);
@@ -9,7 +9,7 @@ const InterviewPage = () => {
   const token = useSelector((state) => state.auth.token);
   const fetchdata = async () => {
     try {
-      const respo = await axios.get("http://localhost:8000/getjobseeker", {
+      const respo = await api.get("/getjobseeker", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setinterview(respo.data.jobseekerinter || null);

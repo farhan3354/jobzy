@@ -3,7 +3,8 @@ import { FaUsersLine } from "react-icons/fa6";
 import { ImUserCheck } from "react-icons/im";
 import { IoBriefcaseSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from "./../api/register";
+
 import { useSelector } from "react-redux";
 
 export default function AdminDashboard() {
@@ -20,7 +21,7 @@ export default function AdminDashboard() {
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:8000/alldetails ", {
+      const response = await api.get("/alldetails ", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

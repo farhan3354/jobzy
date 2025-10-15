@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaEdit, FaFilter, FaPlus, FaSort } from "react-icons/fa";
 import { IoIosEye } from "react-icons/io";
@@ -9,6 +8,7 @@ import {
   RiUserUnfollowLine,
 } from "react-icons/ri";
 import { useSelector } from "react-redux";
+import api from "../../api/register";
 
 const CheckUsers = () => {
   const [search, setSearch] = useState("");
@@ -16,7 +16,7 @@ const CheckUsers = () => {
   const token = useSelector((state) => state.auth.token);
   const fetchemployer = async () => {
     try {
-      const respo = await axios.get("http://localhost:8000/getemployer", {
+      const respo = await api.get("/getemployer", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setemployer(respo.data.employer || null);

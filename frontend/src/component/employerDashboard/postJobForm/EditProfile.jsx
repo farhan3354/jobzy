@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import api from "../../../api/register";
 
 export default function EditProfile() {
   const navigate = useNavigate();
@@ -20,8 +20,8 @@ export default function EditProfile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:8000/getprofileemployer",
+        const res = await api.get(
+          "/getprofileemployer",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -62,8 +62,8 @@ export default function EditProfile() {
         formData.append("companylogo", data.companylogo[0]);
       }
 
-      const repo = await axios.put(
-        "http://localhost:8000/updateemployer",
+      const repo = await api.put(
+        "/updateemployer",
         formData,
         {
           headers: {

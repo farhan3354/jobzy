@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import StepThree from "./StepThree";
 import StepTwo from "./StepTwo";
 import StepOneProfile from "./StepOneProfile";
+import api from "../../../api/register";
 
 export default function JobSeekerProfileForm() {
   const {
@@ -20,64 +20,7 @@ export default function JobSeekerProfileForm() {
   const token = useSelector((state) => state.auth.token);
   const [step, setStep] = useState(1);
 
-  //   const onSubmit = async (data) => {
-  //     try {
-  //       const formData = new FormData();
-
-  //       formData.append("headline", data.headline);
-  //       formData.append("about", data.about);
-
-  //       formData.append("experience[0].title", data.experience?.[0]?.title || "");
-  //       formData.append(
-  //         "experience[0].company",
-  //         data.experience?.[0]?.company || ""
-  //       );
-  //       formData.append(
-  //         "location",
-  //         data.location || ""
-  //       );
-
-  //       formData.append(
-  //         "experience[0].description",
-  //         data.experience?.[0]?.description || ""
-  //       );
-
-  //       formData.append("education[0].degree", data.education?.[0]?.degree || "");
-  //       formData.append(
-  //         "education[0].institution",
-  //         data.education?.[0]?.institution || ""
-  //       );
-  //       formData.append("education[0].year", data.education?.[0]?.year || "");
-
-  //       const skillsArray = data.skills.split(",").map((skill) => skill.trim());
-  //       skillsArray.forEach((skill, index) => {
-  //         formData.append(`skills[${index}]`, skill);
-  //       });
-
-  //       if (data.resume && data.resume[0]) {
-  //         formData.append("resume", data.resume[0]);
-  //       }
-
-  //       const response = await axios.post(
-  //         "http://localhost:8000/createprofile",
-  //         formData,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //             "Content-Type": "multipart/form-data",
-  //           },
-  //         }
-  //       );
-
-  //       if (response.data.success) {
-  //         toast.success("Profile created successfully");
-  //         navigate("/profile");
-  //       }
-  //     } catch (error) {
-  //       toast.error(error.response?.data?.message || "Error creating profile");
-  //     }
-  //   };
-
+ 
   const onSubmit = async (data) => {
     try {
       const formData = new FormData();
@@ -108,8 +51,8 @@ export default function JobSeekerProfileForm() {
         formData.append("resume", data.resume[0]);
       }
 
-      const response = await axios.post(
-        "http://localhost:8000/createprofile",
+      const response = await api.post(
+        "/createprofile",
         formData,
         {
           headers: {
@@ -249,7 +192,7 @@ export default function JobSeekerProfileForm() {
 //   //     }
 
 //   //     const response = await axios.post(
-//   //       "http://localhost:8000/createprofile",
+//   //       "/createprofile",
 //   //       formData,
 //   //       {
 //   //         headers: {
@@ -303,7 +246,7 @@ export default function JobSeekerProfileForm() {
 //       if (mode && profileId) {
 //         // UPDATE PROFILE
 //         response = await axios.put(
-//           `http://localhost:8000/update/${profileId}`,
+//           `/update/${profileId}`,
 //           formData,
 //           {
 //             headers: {
@@ -315,7 +258,7 @@ export default function JobSeekerProfileForm() {
 //       } else {
 //         // CREATE PROFILE
 //         response = await axios.post(
-//           "http://localhost:8000/createprofile",
+//           "/createprofile",
 //           formData,
 //           {
 //             headers: {
@@ -464,7 +407,7 @@ export default function JobSeekerProfileForm() {
 //       let response;
 //       if (mode === "edit" && profileId) {
 //         response = await axios.put(
-//           `http://localhost:8000/updateprofile/${profileId}`,
+//           `/updateprofile/${profileId}`,
 //           formData,
 //           {
 //             headers: {
@@ -475,7 +418,7 @@ export default function JobSeekerProfileForm() {
 //         );
 //       } else {
 //         response = await axios.post(
-//           "http://localhost:8000/createprofile",
+//           "/createprofile",
 //           formData,
 //           {
 //             headers: {

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   FaBuilding,
@@ -17,6 +16,7 @@ import {
 
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import api from "../../api/register";
 
 export default function EmployerProfile() {
   const token = useSelector((state) => state.auth.token);
@@ -24,7 +24,7 @@ export default function EmployerProfile() {
   const [loading, setloading] = useState(true);
   const fetchprofile = async () => {
     try {
-      const repo = await axios.get("http://localhost:8000/getprofileemployer", {
+      const repo = await api.get("/getprofileemployer", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProfile(repo.data.user || null);

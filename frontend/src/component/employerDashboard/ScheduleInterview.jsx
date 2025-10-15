@@ -8,8 +8,8 @@ import {
   FiFileText,
   FiArrowLeft,
 } from "react-icons/fi";
-import axios from "axios";
 import { useSelector } from "react-redux";
+import api from "../../api/register";
 
 const ScheduleInterview = () => {
   const { id } = useParams();
@@ -23,8 +23,8 @@ const ScheduleInterview = () => {
 
   const onSubmit = async (data) => {
     try {
-      const respo = await axios.post(
-        `http://localhost:8000/interview/${id}`,
+      const respo = await api.post(
+        `/interview/${id}`,
         data,
         { headers: { Authorization: `Bearer ${token}` } }
       );

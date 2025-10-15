@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import StepOne from "./postJobForm/StepOne";
 import StepTwo from "./postJobForm/StepTwo";
 import StepThree from "./postJobForm/StepThree";
+import api from "../../api/register";
 
 const EditJob = () => {
   const {
@@ -24,7 +24,7 @@ const EditJob = () => {
 
   const getUpdatedJob = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/get-job/${id}`, {
+      const res = await api.get(`/get-job/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -56,8 +56,8 @@ const EditJob = () => {
           .filter((s) => s !== ""),
       };
 
-      const res = await axios.put(
-        `http://localhost:8000/edit-job/${id}`,
+      const res = await api.put(
+        `/edit-job/${id}`,
         formattedData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

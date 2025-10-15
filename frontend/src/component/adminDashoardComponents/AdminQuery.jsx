@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import {
   FiMessageSquare,
   FiUser,
@@ -11,6 +10,7 @@ import {
   FiTrash2,
   FiMessageCircle,
 } from "react-icons/fi";
+import api from "../../api/register";
 
 const AdminQueries = () => {
   const [queries, setQueries] = useState([]);
@@ -27,8 +27,8 @@ const AdminQueries = () => {
   const fetchAllQueries = async () => {
     try {
       setLoading(true);
-      const response = await axios.post(
-        "http://localhost:8000/contactget",
+      const response = await api.post(
+        "/contactget",
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -64,7 +64,7 @@ const AdminQueries = () => {
     if (window.confirm("Are you sure you want to delete this query?")) {
       try {
         console.log(`Deleting query ${queryId}`);
-        await axios.delete(`http://localhost:8000/contact/${queryId}`);
+        await api.delete(`/contact/${queryId}`);
 
         fetchAllQueries();
       } catch (error) {

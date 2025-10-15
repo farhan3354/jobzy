@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import LeftSidejob from "./LeftSideJob";
-import axios from "axios";
+import api from "../../api/register";
 
 export default function JobList() {
   const [selectedJob, setSelectedJob] = useState(null);
@@ -27,7 +27,7 @@ export default function JobList() {
 
   const fetchAllJobs = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/get-alljobs");
+      const response = await api.get("/get-alljobs");
       const allJobs = response.data.jobs || [];
       setJobs(allJobs);
       setFilteredJobs(allJobs);
@@ -356,7 +356,7 @@ export default function JobList() {
 
 //   const fetchAllJobs = async () => {
 //     try {
-//       const response = await axios.get("http://localhost:8000/get-alljobs");
+//       const response = await axios.get("/get-alljobs");
 //       setJobs(response.data.jobs || []);
 //       if (response.data.jobs && response.data.jobs.length > 0) {
 //         setSelectedJob(response.data.jobs[0]);

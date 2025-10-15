@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import StepThree from "./StepThree";
 import StepTwo from "./StepTwo";
 import StepOneProfile from "./StepOneProfile";
+import api from "../../../api/register";
 
 export default function EditJobSeeker() {
   const {
@@ -27,7 +27,7 @@ export default function EditJobSeeker() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/getprofile", {
+        const response = await api.get("/getprofile", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -90,8 +90,8 @@ export default function EditJobSeeker() {
         formData.append("resume", data.resume[0]);
       }
 
-      const response = await axios.put(
-        `http://localhost:8000/update/${profileId}`,
+      const response = await api.put(
+        `/update/${profileId}`,
         formData,
         {
           headers: {

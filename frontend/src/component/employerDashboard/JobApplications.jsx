@@ -11,10 +11,10 @@ import {
   FiDownload,
 } from "react-icons/fi";
 import { useState } from "react";
-import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import api from "../../api/register";
 
 const JobApplications = () => {
   const { id: jobId } = useParams();
@@ -36,8 +36,8 @@ const JobApplications = () => {
   useEffect(() => {
     const fetchApplicants = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:8000/all-applicant/${jobId}`,
+        const res = await api.get(
+          `/all-applicant/${jobId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

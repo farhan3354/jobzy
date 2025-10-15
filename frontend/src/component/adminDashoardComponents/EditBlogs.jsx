@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import api from "../../api/register";
 
 export default function EditBlog() {
   const {
@@ -21,8 +21,8 @@ export default function EditBlog() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8000/api/blog/${id}`,
+        const response = await api.get(
+          `/api/blog/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -63,8 +63,8 @@ export default function EditBlog() {
         formData.append("blog", data.blog[0]);
       }
 
-      const response = await axios.put(
-        `http://localhost:8000/api/update/${id}`,
+      const response = await api.put(
+        `/api/update/${id}`,
         formData,
         {
           headers: {

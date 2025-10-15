@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   FiUser,
@@ -12,6 +11,7 @@ import {
 import { MdWorkOutline, MdBusinessCenter } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import api from "../../api/register";
 
 const UserDashboard = () => {
   const [jobs, setJobs] = useState([]);
@@ -22,7 +22,7 @@ const UserDashboard = () => {
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
-      const resp = await axios.get("http://localhost:8000/getjobsdashboard", {
+      const resp = await api.get("/getjobsdashboard", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setJobs(resp.data.jobs || []);
@@ -245,7 +245,7 @@ export default UserDashboard;
 //   const token = useSelector((state) => state.auth.token);
 //   const fetchProfile = async () => {
 //     try {
-//       const resp = await axios.get("http://localhost:8000/get-profile-score", {
+//       const resp = await axios.get("/get-profile-score", {
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
 //       setProfile(resp.data.profileCompletion || 0);

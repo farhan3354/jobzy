@@ -5,8 +5,8 @@ import {
   FaMapMarkerAlt,
   FaCalendarAlt,
 } from "react-icons/fa";
-import axios from "axios";
 import { useSelector } from "react-redux";
+import api from "../../api/register";
 
 export default function AppliedAllJobs() {
   const [appliedJobs, setappliedjobs] = useState([]);
@@ -15,7 +15,7 @@ export default function AppliedAllJobs() {
 
   const fetchaplliedjobs = async () => {
     try {
-      const repos = await axios.get("http://localhost:8000/details", {
+      const repos = await api.get("/details", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setappliedjobs(repos.data.applications || null);

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { FaEdit, FaTrash, FaUsers } from "react-icons/fa";
 import { MdOutlineWork } from "react-icons/md";
@@ -17,7 +16,7 @@ export default function EmployerAllPostedJobs() {
 
   const fetchAllJobs = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/get-jobs", {
+      const res = await axios.get("/get-jobs", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -57,7 +56,7 @@ export default function EmployerAllPostedJobs() {
     if (result.isConfirmed) {
       try {
         const response = await axios.put(
-          `http://localhost:8000/update-job-status/${jobId}`,
+          `/update-job-status/${jobId}`,
           { status: "Closed" },
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -81,8 +80,8 @@ export default function EmployerAllPostedJobs() {
 
   const handleStatusChange = async (jobId, status) => {
     try {
-      const res = await axios.put(
-        `http://localhost:8000/update-job-status/${jobId}`,
+      const res = await api.put(
+        `/update-job-status/${jobId}`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -264,6 +263,7 @@ export default function EmployerAllPostedJobs() {
 // import { Link } from "react-router-dom";
 // import Swal from "sweetalert2";
 import Job from "./../../pages/userDashboardPages/Job";
+import api from "../../api/register";
 
 // export default function EmployerAllPostedJobs() {
 //   const token = useSelector((state) => state.auth.token);
@@ -273,7 +273,7 @@ import Job from "./../../pages/userDashboardPages/Job";
 
 //   const fetchAllJobs = async () => {
 //     try {
-//       const res = await axios.get("http://localhost:8000/get-jobs", {
+//       const res = await axios.get("/get-jobs", {
 //         headers: {
 //           Authorization: `Bearer ${token}`,
 //         },
@@ -313,7 +313,7 @@ import Job from "./../../pages/userDashboardPages/Job";
 //     if (result.isConfirmed) {
 //       try {
 //         const response = await axios.delete(
-//           `http://localhost:8000/remove/${jobId}`,
+//           `/remove/${jobId}`,
 //           {
 //             headers: { Authorization: `Bearer ${token}` },
 //           }

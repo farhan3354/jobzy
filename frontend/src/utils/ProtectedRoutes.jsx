@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "./../api/register";
 
 const ProtectRoute = ({ role: requiredRole }) => {
   const token = useSelector((state) => state.auth.token);
@@ -15,7 +15,7 @@ const ProtectRoute = ({ role: requiredRole }) => {
 
     const verifyUser = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/verify", {
+        const res = await api.get("/verify", {
           headers: { Authorization: `Bearer ${token}` },
         });
 

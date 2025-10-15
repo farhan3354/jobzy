@@ -11,9 +11,9 @@ import {
 import { FaPlus } from "react-icons/fa6";
 
 import { MdWork, MdSchool } from "react-icons/md";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import api from "../../../api/register";
 
 export default function ProfileSetting() {
   const [profile, setProfile] = useState(null);
@@ -23,7 +23,7 @@ export default function ProfileSetting() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/getprofile`, {
+        const response = await api.get(`/getprofile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProfile(response.data.profile);

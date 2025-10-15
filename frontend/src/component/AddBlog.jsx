@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import api from "../api/register";
 
 export default function CreateBlog() {
   const {
@@ -27,8 +27,8 @@ export default function CreateBlog() {
         formData.append("blog", data.blog[0]);
       }
 
-      const response = await axios.post(
-        "http://localhost:8000/blogs/create",
+      const response = await api.post(
+        "/blogs/create",
         formData,
         {
           headers: {

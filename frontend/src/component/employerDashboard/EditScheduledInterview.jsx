@@ -5,11 +5,11 @@ import {
   FiFileText,
   FiArrowLeft,
 } from "react-icons/fi";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import api from "../../api/register";
 
 const EditScheduledInterview = () => {
   const { id } = useParams();
@@ -27,8 +27,8 @@ const EditScheduledInterview = () => {
   useEffect(() => {
     const fetchInterviewData = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8000/getinterview/${id}`,
+        const response = await api.get(
+          `/getinterview/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -58,8 +58,8 @@ const EditScheduledInterview = () => {
 
   const onSubmit = async (data) => {
     try {
-      const respo = await axios.put(
-        `http://localhost:8000/editinterview/${id}`,
+      const respo = await api.put(
+        `/editinterview/${id}`,
         data,
         { headers: { Authorization: `Bearer ${token}` } }
       );

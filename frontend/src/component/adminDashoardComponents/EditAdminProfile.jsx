@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useSelector } from "react-redux";
+import api from "../../api/register";
 
 export default function EditAdminProfile() {
   const { register, handleSubmit, setValue } = useForm();
@@ -13,7 +13,7 @@ export default function EditAdminProfile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/admin", {
+        const res = await api.get("/admin", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -48,7 +48,7 @@ export default function EditAdminProfile() {
         formData.append("profileImage", data.profileImage[0]);
       }
 
-      const res = await axios.patch("http://localhost:8000/edit", formData, {
+      const res = await api.patch("/edit", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

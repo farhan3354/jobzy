@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useSelector } from "react-redux";
+import api from "../../api/register";
 
 export default function ChangePassword() {
   const {
@@ -21,8 +21,8 @@ export default function ChangePassword() {
     setMessage(null);
 
     try {
-      const res = await axios.patch(
-        "http://localhost:8000/changepassword",
+      const res = await api.patch(
+        "/changepassword",
         data,
 
         {

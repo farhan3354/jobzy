@@ -1,9 +1,9 @@
-import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import api from './../../../api/register';
 
 export default function CreateProfile() {
   const navigate = useNavigate();
@@ -25,8 +25,8 @@ export default function CreateProfile() {
       if (data.companylogo && data.companylogo[0]) {
         formData.append("companylogo", data.companylogo[0]);
       }
-      const repo = await axios.post(
-        "http://localhost:8000/createemployerprofile",
+      const repo = await api.post(
+        "/createemployerprofile",
         formData,
         {
           headers: {

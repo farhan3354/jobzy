@@ -20,7 +20,7 @@
 //   const getApplicant = async () => {
 //     try {
 //       const response = await axios.get(
-//         `http://localhost:8000/jobseeker-details/${id}`,
+//         `/jobseeker-details/${id}`,
 //         {
 //           headers: { Authorization: `Bearer ${token}` },
 //         }
@@ -247,8 +247,8 @@ import {
   FiAward,
   FiFileText,
 } from "react-icons/fi";
-import axios from "axios";
 import { useSelector } from "react-redux";
+import api from "../../api/register";
 
 const JobSeekerDetail = () => {
   const { id } = useParams();
@@ -260,8 +260,8 @@ const JobSeekerDetail = () => {
 
   const getApplicant = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8000/jobseeker-details/${id}`,
+      const response = await api.get(
+        `/jobseeker-details/${id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
