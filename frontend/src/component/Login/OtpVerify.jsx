@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import axios from "axios";
+import api from "../../api/register";
 
 export default function OTPVerifyForm() {
   const {
@@ -17,7 +17,7 @@ export default function OTPVerifyForm() {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("https://job-portal-xi-dun.vercel.app/verify-otp", {
+      const res = await api.post("/verify-otp", {
         email,
         otp: data.otp,
       });
