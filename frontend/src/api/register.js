@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "./../redux/store";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8000",
@@ -11,19 +12,45 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const token = (state) => state.auth.token;
+    const token = store.getState().auth.token;
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
-api.interceptors.response.use((response) => {
-  return response;
-});
-
 export default api;
+
+// import axios from "axios";
+
+// const api = axios.create({
+//   baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8000",
+//   timeout: 10000,
+//   withCredentials: false,
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// });
+
+// api.interceptors.request.use(
+//   (config) => {
+//     const token = (state) => state.auth.token;
+//     if (token) {
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
+
+// api.interceptors.response.use((response) => {
+//   return response;
+// });
+
+// export default api;
