@@ -23,6 +23,7 @@ const router = express.Router();
 router.post("/register", registeruser);
 
 router.post("/verify-otp", verifyOtp);
+router.post("/resend-otp", verifyOtp);
 
 router.post("/login", loginuser);
 
