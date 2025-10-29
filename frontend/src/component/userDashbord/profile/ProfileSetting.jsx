@@ -61,8 +61,7 @@ export default function ProfileSetting() {
             Profile Not Found
           </h2>
           <p className="text-gray-600 mb-8 leading-relaxed">
-            It looks like you haven't created your professional profile yet.
-            Let's get started and showcase your skills to potential employers!
+            Complete your profile to increase your job opportunities
           </p>
 
           <Link
@@ -73,7 +72,7 @@ export default function ProfileSetting() {
             Create Your Profile
           </Link>
 
-          <div className="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100">
+          {/* <div className="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100">
             <p className="text-sm text-blue-700 flex items-center justify-center">
               <svg
                 className="w-4 h-4 mr-2"
@@ -90,7 +89,7 @@ export default function ProfileSetting() {
               </svg>
               Complete your profile to increase your job opportunities
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     );

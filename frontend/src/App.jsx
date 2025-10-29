@@ -88,7 +88,6 @@ function App() {
             <Route path="profile/create" element={<JobSeekerProfileForm />} />
             <Route path="profile/edit" element={<EditJobSeeker />} />
             <Route path="change-password" element={<ChangePassword />} />
-
             <Route path="interview" element={<Interview />} />
           </Route>
         </Route>

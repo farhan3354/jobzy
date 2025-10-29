@@ -107,107 +107,237 @@ export default function JobList() {
   );
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-6">
-          <div className="bg-white rounded-lg shadow-sm p-4">
-            <div className="flex flex-col md:flex-row gap-4 mb-4">
-              <div className="flex-1 relative">
-                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search jobs by title, company, or skills..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setShowFilters(!showFilters)}
-                  className="flex items-center gap-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  <FaFilter className="text-gray-600" />
-                  <span>Filters</span>
-                  {(locationFilter || dateFilter) && (
-                    <span className="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                      {(locationFilter ? 1 : 0) + (dateFilter ? 1 : 0)}
-                    </span>
-                  )}
-                </button>
-
-                {(searchTerm || locationFilter || dateFilter) && (
-                  <button
-                    onClick={clearFilters}
-                    className="px-4 py-3 text-gray-600 hover:text-gray-800 transition-colors"
-                  >
-                    Clear All
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {showFilters && (
-              <div className="border-t pt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <FaMapMarkerAlt className="inline mr-2" />
-                    Location
-                  </label>
+    <>
+      <div className="bg-gray-50 min-h-screen">
+        <div className="container mx-auto px-4 py-8">
+          <div className="mb-6">
+            <div className="bg-white rounded-lg shadow-sm p-4">
+              <div className="flex flex-col md:flex-row gap-4 mb-4">
+                <div className="flex-1 relative">
+                  <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Filter by location..."
-                    value={locationFilter}
-                    onChange={(e) => setLocationFilter(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Search jobs by title, company, or skills..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <FaCalendarAlt className="inline mr-2" />
-                    Date Posted
-                  </label>
-                  <select
-                    value={dateFilter}
-                    onChange={(e) => setDateFilter(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setShowFilters(!showFilters)}
+                    className="flex items-center gap-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                   >
-                    <option value="">Any time</option>
-                    <option value="last24h">Last 24 hours</option>
-                    <option value="last3days">Last 3 days</option>
-                    <option value="lastWeek">Last week</option>
-                    <option value="lastMonth">Last month</option>
-                  </select>
+                    <FaFilter className="text-gray-600" />
+                    <span>Filters</span>
+                    {(locationFilter || dateFilter) && (
+                      <span className="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        {(locationFilter ? 1 : 0) + (dateFilter ? 1 : 0)}
+                      </span>
+                    )}
+                  </button>
+
+                  {(searchTerm || locationFilter || dateFilter) && (
+                    <button
+                      onClick={clearFilters}
+                      className="px-4 py-3 text-gray-600 hover:text-gray-800 transition-colors"
+                    >
+                      Clear All
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {showFilters && (
+                <div className="border-t pt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <FaMapMarkerAlt className="inline mr-2" />
+                      Location
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Filter by location..."
+                      value={locationFilter}
+                      onChange={(e) => setLocationFilter(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <FaCalendarAlt className="inline mr-2" />
+                      Date Posted
+                    </label>
+                    <select
+                      value={dateFilter}
+                      onChange={(e) => setDateFilter(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="">Any time</option>
+                      <option value="last24h">Last 24 hours</option>
+                      <option value="last3days">Last 3 days</option>
+                      <option value="lastWeek">Last week</option>
+                      <option value="lastMonth">Last month</option>
+                    </select>
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-4 text-sm text-gray-600">
+                Showing {activeJobs.length} of{" "}
+                {
+                  jobs.filter(
+                    (job) =>
+                      job.status !== "Closed" && job.status !== "Inactive"
+                  ).length
+                }{" "}
+                jobs
+                {(searchTerm || locationFilter || dateFilter) && (
+                  <span className="ml-2">
+                    •{" "}
+                    <button
+                      onClick={clearFilters}
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      Clear filters
+                    </button>
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col lg:flex-row gap-6">
+            <div className="lg:w-[40%]">
+              <LeftSidejob
+                selectedJob={selectedJob}
+                setSelectedJob={setSelectedJob}
+                jobs={activeJobs}
+              />
+            </div>
+
+            {selectedJob ? (
+              <div className="lg:w-2/3 py-8">
+                {" "}
+                <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 sticky top-4">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-start gap-4 mb-4">
+                    <div className="flex-1">
+                      <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+                        {selectedJob.jobTitle}
+                      </h2>
+                      <div className="flex items-center mt-1 sm:mt-2">
+                        <FaBuilding className="text-gray-500 mr-2 flex-shrink-0" />
+                        <span className="text-gray-700 font-medium">
+                          {selectedJob.companyName}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <button className="bg-gray-200 hover:bg-gray-300 p-2 rounded-full transition">
+                        <FaBookmark className="text-gray-500" />
+                      </button>
+                      <button className="bg-gray-200 hover:bg-gray-300 p-2 rounded-full transition">
+                        <FaShareAlt className="text-gray-500" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-b border-gray-200 py-3 sm:py-4 my-3 sm:my-4">
+                    <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600">
+                      <div className="flex items-center">
+                        <FaMapMarkerAlt className="mr-2 flex-shrink-0" />
+                        <span>{selectedJob.location}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <FaBriefcase className="mr-2 flex-shrink-0" />
+                        <span>{selectedJob.employmentType}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <FaMoneyBillWave className="mr-2 flex-shrink-0" />
+                        <span>{selectedJob.salary}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <FaClock className="mr-2 flex-shrink-0" />
+                        <span>
+                          {new Date(selectedJob.createdAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mb-4 sm:mb-6">
+                    <h3 className="text-lg font-semibold mb-2">
+                      Job Description
+                    </h3>
+                    <p className="text-gray-700">
+                      {selectedJob.jobDescription}
+                    </p>
+                  </div>
+
+                  <div className="mb-4 sm:mb-6">
+                    <h3 className="text-lg font-semibold mb-2">Requirements</h3>
+                    <ul className="list-disc pl-5 text-gray-700 space-y-1">
+                      {selectedJob.requirements &&
+                        selectedJob.requirements.map((req, index) => (
+                          <li key={index}>{req}</li>
+                        ))}
+                    </ul>
+                  </div>
+
+                  {selectedJob.skills && selectedJob.skills.length > 0 && (
+                    <div className="mb-4 sm:mb-6">
+                      <h3 className="text-lg font-semibold mb-2">Skills</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedJob.skills.map((skill, index) => (
+                          <span
+                            key={index}
+                            className="bg-blue-100 text-blue-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex flex-col sm:flex-row justify-between items-center gap-3 pt-4 border-t border-gray-200">
+                    <Link
+                      to={`/user-dashboard/apply/${selectedJob._id}`}
+                      className="w-full sm:w-auto bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-blue-700 transition font-medium text-center"
+                    >
+                      Apply Now
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="lg:w-2/3 py-8">
+                {" "}
+                <div className="bg-white rounded-lg shadow-md p-8 text-center">
+                  <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                    No jobs found
+                  </h3>
+                  <p className="text-gray-500 mb-4">
+                    {searchTerm || locationFilter || dateFilter
+                      ? "Try adjusting your search criteria or clear filters to see more jobs."
+                      : "There are currently no active job listings."}
+                  </p>
+                  {(searchTerm || locationFilter || dateFilter) && (
+                    <button
+                      onClick={clearFilters}
+                      className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+                    >
+                      Clear Filters
+                    </button>
+                  )}
                 </div>
               </div>
             )}
-
-            <div className="mt-4 text-sm text-gray-600">
-              Showing {activeJobs.length} of{" "}
-              {
-                jobs.filter(
-                  (job) => job.status !== "Closed" && job.status !== "Inactive"
-                ).length
-              }{" "}
-              jobs
-              {(searchTerm || locationFilter || dateFilter) && (
-                <span className="ml-2">
-                  •{" "}
-                  <button
-                    onClick={clearFilters}
-                    className="text-blue-600 hover:text-blue-800"
-                  >
-                    Clear filters
-                  </button>
-                </span>
-              )}
-            </div>
           </div>
-        </div>
-
-        <div className="flex flex-col lg:flex-row gap-6">
+          {/* <div className="flex flex-col lg:flex-row gap-6">
           <LeftSidejob
             selectedJob={selectedJob}
             setSelectedJob={setSelectedJob}
@@ -328,9 +458,10 @@ export default function JobList() {
               </div>
             </div>
           )}
+        </div> */}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

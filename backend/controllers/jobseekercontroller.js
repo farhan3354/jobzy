@@ -289,6 +289,7 @@ export const getProfileScore = async (req, res) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+
 // export const createProfile = async (req, res) => {
 //   try {
 //     const userId = req.user.id;
