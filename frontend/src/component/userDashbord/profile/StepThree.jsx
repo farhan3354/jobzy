@@ -3,8 +3,9 @@ import React from "react";
 export default function StepThree({ register, errors }) {
   return (
     <>
-      <h3 className="font-semibold mb-2 text-center">Degree</h3>
+      {/* <h3 className="font-semibold mb-2 text-center">Degree</h3> */}
       <div>
+        <label className="block mb-1 font-medium">Degree</label>
         <input
           type="text"
           {...register("seekerdegree")}
@@ -16,6 +17,8 @@ export default function StepThree({ register, errors }) {
         )}
       </div>
       <div>
+        <label className="block mb-1 font-medium">Institute</label>
+
         <input
           type="text"
           {...register("seekerinsitute")}
@@ -29,6 +32,8 @@ export default function StepThree({ register, errors }) {
         )}
       </div>
       <div>
+        <label className="block mb-1 font-medium">Education</label>
+
         <input
           type="text"
           {...register("seekereducation", { required: "Eduction is required" })}

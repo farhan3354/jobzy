@@ -57,10 +57,10 @@ export default function ProfileSetting() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">
+          {/* <h2 className="text-2xl font-bold text-gray-900 mb-3">
             Profile Not Found
-          </h2>
-          <p className="text-gray-600 mb-8 leading-relaxed">
+          </h2> */}
+          <p className="text-gray-600 text-2xl font-bold mb-8 leading-relaxed">
             Complete your profile to increase your job opportunities
           </p>
 
@@ -69,7 +69,7 @@ export default function ProfileSetting() {
             className="inline-flex items-center px-6 py-3 text-white font-semibold rounded-xl bg-blue-600"
           >
             <FaPlus />
-            Create Your Profile
+            Complete Your Profile
           </Link>
 
           {/* <div className="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100">

@@ -19,7 +19,6 @@ export default function JobList() {
   const [selectedJob, setSelectedJob] = useState(null);
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
-
   const [searchTerm, setSearchTerm] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
@@ -209,262 +208,259 @@ export default function JobList() {
             </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-6">
-            <div className="lg:w-[40%]">
-              <LeftSidejob
-                selectedJob={selectedJob}
-                setSelectedJob={setSelectedJob}
-                jobs={activeJobs}
-              />
-            </div>
+          {/* Mobile Layout - Single column */}
+          <div className="block lg:hidden">
+            <div className="space-y-4">
+              {/* Job List */}
+              <div className="bg-white rounded-lg shadow-md">
+                <LeftSidejob
+                  selectedJob={selectedJob}
+                  setSelectedJob={setSelectedJob}
+                  jobs={activeJobs}
+                />
+              </div>
 
-            {selectedJob ? (
-              <div className="lg:w-2/3 py-8">
-                {" "}
-                <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 sticky top-4">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-start gap-4 mb-4">
-                    <div className="flex-1">
-                      <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
-                        {selectedJob.jobTitle}
-                      </h2>
-                      <div className="flex items-center mt-1 sm:mt-2">
-                        <FaBuilding className="text-gray-500 mr-2 flex-shrink-0" />
-                        <span className="text-gray-700 font-medium">
-                          {selectedJob.companyName}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-2">
-                      <button className="bg-gray-200 hover:bg-gray-300 p-2 rounded-full transition">
-                        <FaBookmark className="text-gray-500" />
-                      </button>
-                      <button className="bg-gray-200 hover:bg-gray-300 p-2 rounded-full transition">
-                        <FaShareAlt className="text-gray-500" />
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="border-t border-b border-gray-200 py-3 sm:py-4 my-3 sm:my-4">
-                    <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600">
-                      <div className="flex items-center">
-                        <FaMapMarkerAlt className="mr-2 flex-shrink-0" />
-                        <span>{selectedJob.location}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <FaBriefcase className="mr-2 flex-shrink-0" />
-                        <span>{selectedJob.employmentType}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <FaMoneyBillWave className="mr-2 flex-shrink-0" />
-                        <span>{selectedJob.salary}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <FaClock className="mr-2 flex-shrink-0" />
-                        <span>
-                          {new Date(selectedJob.createdAt).toLocaleDateString()}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mb-4 sm:mb-6">
-                    <h3 className="text-lg font-semibold mb-2">
-                      Job Description
-                    </h3>
-                    <p className="text-gray-700">
-                      {selectedJob.jobDescription}
-                    </p>
-                  </div>
-
-                  <div className="mb-4 sm:mb-6">
-                    <h3 className="text-lg font-semibold mb-2">Requirements</h3>
-                    <ul className="list-disc pl-5 text-gray-700 space-y-1">
-                      {selectedJob.requirements &&
-                        selectedJob.requirements.map((req, index) => (
-                          <li key={index}>{req}</li>
-                        ))}
-                    </ul>
-                  </div>
-
-                  {selectedJob.skills && selectedJob.skills.length > 0 && (
-                    <div className="mb-4 sm:mb-6">
-                      <h3 className="text-lg font-semibold mb-2">Skills</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedJob.skills.map((skill, index) => (
-                          <span
-                            key={index}
-                            className="bg-blue-100 text-blue-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm"
-                          >
-                            {skill}
+              {/* Job Details - Only show when job is selected */}
+              {selectedJob && (
+                <div className="bg-white rounded-lg shadow-md p-4 mt-4">
+                  <div className="border-b border-gray-200 pb-4 mb-4">
+                    <div className="flex flex-col gap-3">
+                      <div>
+                        <h2 className="text-xl font-bold text-gray-800">
+                          {selectedJob.jobTitle}
+                        </h2>
+                        <div className="flex items-center mt-1">
+                          <FaBuilding className="text-gray-500 mr-2 flex-shrink-0" />
+                          <span className="text-gray-700 font-medium">
+                            {selectedJob.companyName}
                           </span>
-                        ))}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-3 text-sm text-gray-600">
+                        <div className="flex items-center">
+                          <FaMapMarkerAlt className="mr-2 flex-shrink-0" />
+                          <span>{selectedJob.location}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <FaBriefcase className="mr-2 flex-shrink-0" />
+                          <span>{selectedJob.employmentType}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <FaMoneyBillWave className="mr-2 flex-shrink-0" />
+                          <span>{selectedJob.salary}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <FaClock className="mr-2 flex-shrink-0" />
+                          <span>
+                            {new Date(selectedJob.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
+                      </div>
+
+                      <Link
+                        to={`/user-dashboard/apply/${selectedJob._id}`}
+                        className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition font-medium text-center"
+                      >
+                        Apply Now
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">
+                        Job Description
+                      </h3>
+                      <p className="text-gray-700">
+                        {selectedJob.jobDescription}
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Requirements</h3>
+                      <ul className="list-disc pl-5 text-gray-700 space-y-1">
+                        {selectedJob.requirements &&
+                          selectedJob.requirements.map((req, index) => (
+                            <li key={index}>{req}</li>
+                          ))}
+                      </ul>
+                    </div>
+
+                    {selectedJob.skills && selectedJob.skills.length > 0 && (
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2">Skills</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedJob.skills.map((skill, index) => (
+                            <span
+                              key={index}
+                              className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="pt-4 border-t border-gray-200">
+                      <Link
+                        to={`/user-dashboard/apply/${selectedJob._id}`}
+                        className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition font-medium text-center block"
+                      >
+                        Apply Now
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Desktop Layout - Two independent scrollable panels */}
+          <div className="hidden lg:flex flex-row gap-6 h-[calc(100vh-200px)]">
+            {/* Left Panel - Job List with independent scroll */}
+            <div className="w-[40%] flex flex-col">
+              <div className="bg-white rounded-lg shadow-md overflow-hidden flex-1 flex flex-col">
+                <div className="flex-1 overflow-y-auto">
+                  <LeftSidejob
+                    selectedJob={selectedJob}
+                    setSelectedJob={setSelectedJob}
+                    jobs={activeJobs}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Right Panel - Job Details with independent scroll */}
+            <div className="w-[60%] flex flex-col">
+              {selectedJob ? (
+                <div className="bg-white rounded-lg shadow-md overflow-hidden flex-1 flex flex-col">
+                  {/* Sticky Header */}
+                  <div className="sticky top-0 bg-white z-10 border-b border-gray-200 p-6">
+                    <div className="flex flex-row justify-between items-start gap-4">
+                      <div className="flex-1">
+                        <h2 className="text-2xl font-bold text-gray-800">
+                          {selectedJob.jobTitle}
+                        </h2>
+                        <div className="flex items-center mt-2">
+                          <FaBuilding className="text-gray-500 mr-2 flex-shrink-0" />
+                          <span className="text-gray-700 font-medium">
+                            {selectedJob.companyName}
+                          </span>
+                        </div>
+                      </div>
+
+                      <Link
+                        to={`/user-dashboard/apply/${selectedJob._id}`}
+                        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium whitespace-nowrap"
+                      >
+                        Apply Now
+                      </Link>
+                    </div>
+
+                    <div className="border-t border-gray-200 mt-4 pt-4">
+                      <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                        <div className="flex items-center">
+                          <FaMapMarkerAlt className="mr-2 flex-shrink-0" />
+                          <span>{selectedJob.location}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <FaBriefcase className="mr-2 flex-shrink-0" />
+                          <span>{selectedJob.employmentType}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <FaMoneyBillWave className="mr-2 flex-shrink-0" />
+                          <span>{selectedJob.salary}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <FaClock className="mr-2 flex-shrink-0" />
+                          <span>
+                            {new Date(selectedJob.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  )}
-
-                  <div className="flex flex-col sm:flex-row justify-between items-center gap-3 pt-4 border-t border-gray-200">
-                    <Link
-                      to={`/user-dashboard/apply/${selectedJob._id}`}
-                      className="w-full sm:w-auto bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-blue-700 transition font-medium text-center"
-                    >
-                      Apply Now
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="lg:w-2/3 py-8">
-                {" "}
-                <div className="bg-white rounded-lg shadow-md p-8 text-center">
-                  <h3 className="text-xl font-semibold text-gray-600 mb-2">
-                    No jobs found
-                  </h3>
-                  <p className="text-gray-500 mb-4">
-                    {searchTerm || locationFilter || dateFilter
-                      ? "Try adjusting your search criteria or clear filters to see more jobs."
-                      : "There are currently no active job listings."}
-                  </p>
-                  {(searchTerm || locationFilter || dateFilter) && (
-                    <button
-                      onClick={clearFilters}
-                      className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-                    >
-                      Clear Filters
-                    </button>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-          {/* <div className="flex flex-col lg:flex-row gap-6">
-          <LeftSidejob
-            selectedJob={selectedJob}
-            setSelectedJob={setSelectedJob}
-            jobs={activeJobs}
-          />
-
-          {selectedJob ? (
-            <div className="lg:w-1/2 py-8">
-              <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 sticky top-4">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-start gap-4 mb-4">
-                  <div className="flex-1">
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
-                      {selectedJob.jobTitle}
-                    </h2>
-                    <div className="flex items-center mt-1 sm:mt-2">
-                      <FaBuilding className="text-gray-500 mr-2 flex-shrink-0" />
-                      <span className="text-gray-700 font-medium">
-                        {selectedJob.companyName}
-                      </span>
-                    </div>
                   </div>
 
-                  <div className="flex gap-2">
-                    <button className="bg-gray-200 hover:bg-gray-300 p-2 rounded-full transition">
-                      <FaBookmark className="text-gray-500" />
-                    </button>
-                    <button className="bg-gray-200 hover:bg-gray-300 p-2 rounded-full transition">
-                      <FaShareAlt className="text-gray-500" />
-                    </button>
-                  </div>
-                </div>
+                  {/* Scrollable Content */}
+                  <div className="flex-1 overflow-y-auto p-6">
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2">
+                          Job Description
+                        </h3>
+                        <p className="text-gray-700">
+                          {selectedJob.jobDescription}
+                        </p>
+                      </div>
 
-                <div className="border-t border-b border-gray-200 py-3 sm:py-4 my-3 sm:my-4">
-                  <div className="flex flex-wrap gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600">
-                    <div className="flex items-center">
-                      <FaMapMarkerAlt className="mr-2 flex-shrink-0" />
-                      <span>{selectedJob.location}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <FaBriefcase className="mr-2 flex-shrink-0" />
-                      <span>{selectedJob.employmentType}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <FaMoneyBillWave className="mr-2 flex-shrink-0" />
-                      <span>{selectedJob.salary}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <FaClock className="mr-2 flex-shrink-0" />
-                      <span>
-                        {new Date(selectedJob.createdAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2">Requirements</h3>
+                        <ul className="list-disc pl-5 text-gray-700 space-y-1">
+                          {selectedJob.requirements &&
+                            selectedJob.requirements.map((req, index) => (
+                              <li key={index}>{req}</li>
+                            ))}
+                        </ul>
+                      </div>
 
-                <div className="mb-4 sm:mb-6">
-                  <h3 className="text-lg font-semibold mb-2">
-                    Job Description
-                  </h3>
-                  <p className="text-gray-700">{selectedJob.jobDescription}</p>
-                </div>
+                      {selectedJob.skills && selectedJob.skills.length > 0 && (
+                        <div>
+                          <h3 className="text-lg font-semibold mb-2">Skills</h3>
+                          <div className="flex flex-wrap gap-2">
+                            {selectedJob.skills.map((skill, index) => (
+                              <span
+                                key={index}
+                                className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
 
-                <div className="mb-4 sm:mb-6">
-                  <h3 className="text-lg font-semibold mb-2">Requirements</h3>
-                  <ul className="list-disc pl-5 text-gray-700 space-y-1">
-                    {selectedJob.requirements &&
-                      selectedJob.requirements.map((req, index) => (
-                        <li key={index}>{req}</li>
-                      ))}
-                  </ul>
-                </div>
-
-                {selectedJob.skills && selectedJob.skills.length > 0 && (
-                  <div className="mb-4 sm:mb-6">
-                    <h3 className="text-lg font-semibold mb-2">Skills</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedJob.skills.map((skill, index) => (
-                        <span
-                          key={index}
-                          className="bg-blue-100 text-blue-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm"
+                      <div className="pt-4 border-t border-gray-200">
+                        <Link
+                          to={`/user-dashboard/apply/${selectedJob._id}`}
+                          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium inline-block"
                         >
-                          {skill}
-                        </span>
-                      ))}
+                          Apply Now
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                )}
-
-                <div className="flex flex-col sm:flex-row justify-between items-center gap-3 pt-4 border-t border-gray-200">
-                  <Link
-                    to={`/user-dashboard/apply/${selectedJob._id}`}
-                    className="w-full sm:w-auto bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-blue-700 transition font-medium text-center"
-                  >
-                    Apply Now
-                  </Link>
                 </div>
-              </div>
+              ) : (
+                <div className="bg-white rounded-lg shadow-md p-8 text-center flex items-center justify-center flex-1">
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                      No jobs found
+                    </h3>
+                    <p className="text-gray-500 mb-4">
+                      {searchTerm || locationFilter || dateFilter
+                        ? "Try adjusting your search criteria or clear filters to see more jobs."
+                        : "There are currently no active job listings."}
+                    </p>
+                    {(searchTerm || locationFilter || dateFilter) && (
+                      <button
+                        onClick={clearFilters}
+                        className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+                      >
+                        Clear Filters
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
-          ) : (
-            <div className="lg:w-1/2 py-8">
-              <div className="bg-white rounded-lg shadow-md p-8 text-center">
-                <h3 className="text-xl font-semibold text-gray-600 mb-2">
-                  No jobs found
-                </h3>
-                <p className="text-gray-500 mb-4">
-                  {searchTerm || locationFilter || dateFilter
-                    ? "Try adjusting your search criteria or clear filters to see more jobs."
-                    : "There are currently no active job listings."}
-                </p>
-                {(searchTerm || locationFilter || dateFilter) && (
-                  <button
-                    onClick={clearFilters}
-                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-                  >
-                    Clear Filters
-                  </button>
-                )}
-              </div>
-            </div>
-          )}
-        </div> */}
+          </div>
         </div>
       </div>
     </>
   );
 }
-
 // import React, { useEffect, useState } from "react";
 // import {
 //   FaMapMarkerAlt,
