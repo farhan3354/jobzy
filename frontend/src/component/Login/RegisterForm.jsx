@@ -81,7 +81,7 @@ export default function RegisterForm() {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium text-gray-700">
               I am a *
             </label>
@@ -97,6 +97,42 @@ export default function RegisterForm() {
               <option value="job-seeker">Job Seeker</option>
               <option value="employer">Employer</option>
             </select>
+            {errors.role && (
+              <p className="text-red-500 text-sm mt-1">{errors.role.message}</p>
+            )}
+          </div> */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              I am a *
+            </label>
+            <div className="relative">
+              <select
+                {...register("role", { required: "Please select a role" })}
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="w-full h-12 pl-10 pr-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none bg-white"
+              >
+                <option value="" disabled>
+                  Select Role
+                </option>
+                <option value="job-seeker">Job Seeker</option>
+                <option value="employer">Employer</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center px-2 text-gray-700">
+                <svg
+                  className="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
             {errors.role && (
               <p className="text-red-500 text-sm mt-1">{errors.role.message}</p>
             )}
