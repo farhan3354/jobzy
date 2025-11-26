@@ -3,6 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 import JobCard from "./JobCard";
 import { Link } from "react-router-dom";
 import api from "./../../api/register";
+import TranslatedText from "../TranslatedText";
 
 export default function FeaturedJobs() {
   const [jobs, setJobs] = useState([]);
@@ -48,12 +49,15 @@ export default function FeaturedJobs() {
     <div className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-10 space-y-4 md:space-y-0">
-          <h2 className="text-3xl font-bold">Featured Jobs</h2>
+          <h2 className="text-3xl font-bold">
+            <TranslatedText>Featured Jobs</TranslatedText>
+          </h2>
           <Link
             to="/user-dashboard/jobs"
             className="flex items-center text-blue-600 hover:text-blue-800"
           >
-            View all jobs <FaArrowRight className="ml-2" />
+            <TranslatedText>View all jobs</TranslatedText>{" "}
+            <FaArrowRight className="ml-2" />
           </Link>
         </div>
 
@@ -74,7 +78,9 @@ export default function FeaturedJobs() {
           {currentJobs.length > 0 ? (
             currentJobs.map((job) => <JobCard key={job._id} job={job} />)
           ) : (
-            <p>No jobs found.</p>
+            <p>
+              <TranslatedText>No jobs found.</TranslatedText>
+            </p>
           )}
         </div>
 
@@ -85,7 +91,7 @@ export default function FeaturedJobs() {
               disabled={currentPage === 1}
               className="px-3 py-1 border rounded disabled:opacity-50"
             >
-              Prev
+              <TranslatedText>Prev</TranslatedText>
             </button>
 
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
@@ -107,7 +113,7 @@ export default function FeaturedJobs() {
               disabled={currentPage === totalPages}
               className="px-3 py-1 border rounded disabled:opacity-50"
             >
-              Next
+              <TranslatedText>Next</TranslatedText>
             </button>
           </div>
         )}

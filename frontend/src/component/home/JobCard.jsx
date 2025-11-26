@@ -1,6 +1,7 @@
 import { FaBriefcase, FaMoneyBillWave, FaBookmark } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import TranslatedText from "../TranslatedText";
 
 export default function JobCard({ job }) {
   const token = useSelector((state) => state.auth.token);
@@ -22,9 +23,13 @@ export default function JobCard({ job }) {
             className="w-12 h-12 object-contain"
           /> */}
           <div>
-            <h3 className="font-bold text-lg">{job.jobTitle}</h3>
+            <h3 className="font-bold text-lg">
+              <TranslatedText>{job.jobTitle}</TranslatedText>
+            </h3>
             <p className="text-gray-600">
-              {job.companyName} • {job.location}
+              <TranslatedText>
+                {job.companyName} • {job.location}
+              </TranslatedText>
             </p>
           </div>
         </div>
@@ -36,23 +41,30 @@ export default function JobCard({ job }) {
       <div className="flex flex-wrap items-center gap-4 mt-4 text-gray-600">
         <div className="flex items-center">
           <FaBriefcase className="mr-2 text-blue-500" />
-          <span>{job.employmentType}</span>
+
+          <span>
+            <TranslatedText>{job.employmentType}</TranslatedText>
+          </span>
         </div>
         <div className="flex items-center">
           <FaMoneyBillWave className="mr-2 text-blue-500" />
-          <span>{job.salary}</span>
+          <span>
+            <TranslatedText>{job.salary}</TranslatedText>
+          </span>
         </div>
       </div>
 
       <div className="mt-6 flex justify-between items-center">
         <span className="text-sm text-gray-500">
-          Posted on {new Date(job.createdAt).toDateString()}
+          <TranslatedText>
+            Posted on {new Date(job.createdAt).toDateString()}
+          </TranslatedText>
         </span>
         <button
           onClick={handleuser}
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium"
         >
-          Apply Now
+          <TranslatedText>Apply Now</TranslatedText>
         </button>
       </div>
     </div>

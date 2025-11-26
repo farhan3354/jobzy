@@ -1,5 +1,6 @@
 import React from "react";
 import { statsofhome } from "./../../data/data";
+import TranslatedText from "../TranslatedText";
 
 export default function StatsSection() {
   return (
@@ -9,7 +10,9 @@ export default function StatsSection() {
           {statsofhome.map((stat, index) => (
             <div key={index}>
               <h3 className="text-3xl font-bold text-blue-600">{stat.value}</h3>
-              <p className="text-gray-600">{stat.label}</p>
+              <p className="text-gray-600">
+                <TranslatedText>{stat.label}</TranslatedText>
+              </p>
             </div>
           ))}
         </div>

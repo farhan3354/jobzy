@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import TranslatedText from "../TranslatedText";
 
 export default function Footer() {
   return (
@@ -7,7 +8,6 @@ export default function Footer() {
       <footer className="bg-white text-gray-700 pt-16 mt-12 pb-10 border-t shadow-2xl border-blue-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-            {/* Company Info */}
             <div className="space-y-4">
               <div className="flex items-center">
                 <div className="bg-blue-600 rounded-full p-2">
@@ -26,12 +26,14 @@ export default function Footer() {
                   </svg>
                 </div>
                 <span className="ml-3 text-2xl font-bold text-blue-700">
-                  Jobzy
+                  <TranslatedText>Jobzy</TranslatedText>
                 </span>
               </div>
               <p className="text-gray-500">
-                Your gateway to better careers and great talent. We connect job
-                seekers and employers with ease.
+                <TranslatedText>
+                  Your gateway to better careers and great talent. We connect
+                  job seekers and employers with ease.
+                </TranslatedText>
               </p>
               <div className="flex space-x-4 mt-4">
                 {["facebook", "twitter", "linkedin", "instagram"].map(
@@ -51,12 +53,12 @@ export default function Footer() {
 
             <div>
               <h4 className="text-lg font-semibold text-blue-800 mb-4">
-                Quick Links
+                <TranslatedText>Quick Links</TranslatedText>
               </h4>
               <ul className="space-y-2 text-gray-600">
                 <li>
                   <Link to={"/"} className="hover:text-blue-700 transition">
-                    Home
+                    <TranslatedText>Home</TranslatedText>
                   </Link>
                 </li>
                 <li>
@@ -64,7 +66,7 @@ export default function Footer() {
                     to={"/chose-register"}
                     className="hover:text-blue-700 transition"
                   >
-                    Find Jobs
+                    <TranslatedText>Find Jobs</TranslatedText>
                   </Link>
                 </li>
                 <li>
@@ -72,7 +74,7 @@ export default function Footer() {
                     to={"/chose-register"}
                     className="hover:text-blue-700 transition"
                   >
-                    Post a Job
+                    <TranslatedText>Post a Job</TranslatedText>
                   </Link>
                 </li>
                 <li>
@@ -80,7 +82,7 @@ export default function Footer() {
                     to={"/about"}
                     className="hover:text-blue-700 transition"
                   >
-                    About Us
+                    <TranslatedText>About Us</TranslatedText>
                   </Link>
                 </li>
               </ul>
@@ -88,22 +90,22 @@ export default function Footer() {
 
             <div>
               <h4 className="text-lg font-semibold text-blue-800 mb-4">
-                Resources
+                <TranslatedText>Resources</TranslatedText>
               </h4>
               <ul className="space-y-2 text-gray-600">
                 <li>
                   <a href="#" className="hover:text-blue-700 transition">
-                    Job Tips
+                    <TranslatedText>Job Tips</TranslatedText>
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-blue-700 transition">
-                    Career Advice
+                    <TranslatedText>Career Advice</TranslatedText>
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-blue-700 transition">
-                    FAQs
+                    <TranslatedText>FAQs</TranslatedText>
                   </a>
                 </li>
                 <li>
@@ -117,12 +119,12 @@ export default function Footer() {
             {/* Contact Info */}
             <div>
               <h4 className="text-lg font-semibold text-blue-800 mb-4">
-                Contact
+                <TranslatedText>Contact</TranslatedText>
               </h4>
               <p className="text-gray-600">
-                123 Hiring Lane
+                <TranslatedText>123 Hiring Lane</TranslatedText>
                 <br />
-                San Francisco, CA 94107
+                <TranslatedText>San Francisco, CA 94107</TranslatedText>
               </p>
               <p className="mt-2 text-gray-600">
                 Email:{" "}
@@ -146,8 +148,12 @@ export default function Footer() {
           </div>
 
           <div className="border-t border-blue-100 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-            <p>© 2025 JobConnect. All rights reserved.</p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
+            <p>
+              <TranslatedText>
+                © 2025 JobConnect. All rights reserved.
+              </TranslatedText>
+            </p>
+            {/* <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="hover:text-blue-600 transition">
                 Privacy Policy
               </a>
@@ -157,7 +163,7 @@ export default function Footer() {
               <a href="#" className="hover:text-blue-600 transition">
                 Cookies
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </footer>

@@ -1,5 +1,6 @@
 import React from "react";
 import TestimonialCard from "./TestimonialCard";
+import TranslatedText from "../TranslatedText";
 
 export default function Testimonials() {
   const testimonials = [
@@ -29,9 +30,13 @@ export default function Testimonials() {
   return (
     <div className="py-16 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-4">Success Stories</h2>
+        <h2 className="text-3xl font-bold text-center mb-4">
+          <TranslatedText>Success Stories</TranslatedText>
+        </h2>
         <p className="text-gray-600 text-center max-w-2xl mx-auto mb-10">
-          Hear from people who found their dream jobs through our platform
+          <TranslatedText>
+            Hear from people who found their dream jobs through our platform
+          </TranslatedText>
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

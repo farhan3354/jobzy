@@ -1,9 +1,15 @@
+// export const navItems = [
+//   { name: "Home", path: "/" },
+//   { name: "About", path: "/about" },
+//   { name: "Contact Us", path: "/contact" },
+//   { name: "Blogs", path: "/blog" },
+// ];
+
 export const navItems = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  // { name: "Carrier", path: "/carrier" },
-  { name: "Contact Us", path: "/contact" },
-  { name: "Blogs", path: "/blog" },
+  { name: "home", path: "/" },
+  { name: "about", path: "/about" },
+  { name: "contact", path: "/contact" },
+  { name: "blogs", path: "/blog" },
 ];
 
 export const stats = [

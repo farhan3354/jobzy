@@ -4,6 +4,7 @@ import {
   FaChartLine,
   FaShieldAlt,
 } from "react-icons/fa";
+import TranslatedText from "../TranslatedText";
 
 export default function Categories() {
   const categories = [
@@ -33,11 +34,13 @@ export default function Categories() {
     <div className="bg-gray-50 py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-4">
-          Popular Categories
+          <TranslatedText>Popular Categories</TranslatedText>
         </h2>
         <p className="text-gray-600 text-center max-w-2xl mx-auto mb-10">
-          Browse jobs by category to find the perfect match for your skills and
-          interests
+          <TranslatedText>
+            Browse jobs by category to find the perfect match for your skills
+            and interests
+          </TranslatedText>
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -47,7 +50,9 @@ export default function Categories() {
               className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
             >
               <div className="flex justify-center mb-4">{category.icon}</div>
-              <h3 className="font-bold text-lg mb-2">{category.name}</h3>
+              <h3 className="font-bold text-lg mb-2">
+                <TranslatedText>{category.name}</TranslatedText>
+              </h3>
               {/* <p className="text-gray-500">{category.jobs} jobs available</p> */}
             </div>
           ))}
