@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import Header1 from "./Header1";
+import TranslatedText from "../TranslatedText";
 
 export default function BannerLogin() {
   const location = useLocation();
@@ -16,10 +17,12 @@ export default function BannerLogin() {
                 <Header1 label="Sign up" className="text-white" />
 
                 <p className="max-w-md opacity-90">
-                  Jobzy is your trusted gateway to career success — connecting
-                  talented job seekers with top companies. Whether you're
-                  looking for your first job or your next big opportunity, Jobzy
-                  makes the process simple, fast, and effective.
+                  <TranslatedText>
+                    Jobzy is your trusted gateway to career success — connecting
+                    talented job seekers with top companies. Whether you're
+                    looking for your first job or your next big opportunity,
+                    Jobzy makes the process simple, fast, and effective.
+                  </TranslatedText>
                 </p>
               </div>
             </div>
@@ -38,35 +41,50 @@ export default function BannerLogin() {
                 <Header1 />
                 <div className="bg-green-50 p-6 rounded-lg border border-green-200 mt-8 text-gray-900">
                   <p className="mb-3">
-                    💼 <strong>Find Exceptional Talent</strong> with Jobzy — the
-                    smart way to recruit top-quality candidates.
+                    <TranslatedText>
+                      Find Exceptional Talent with Jobzy —
+                      the smart way to recruit top-quality candidates.
+                    </TranslatedText>
                   </p>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-start">
                       <span className="text-blue-500 mr-2">✓</span>
-                      Post jobs to reach qualified candidates
+                      <TranslatedText>
+                        Post jobs to reach qualified candidates
+                      </TranslatedText>
                     </li>
                     <li className="flex items-start">
                       <span className="text-blue-500 mr-2">✓</span>
-                      Advanced candidate matching
+                      <TranslatedText>
+                        Advanced candidate matching
+                      </TranslatedText>
                     </li>
                     <li className="flex items-start">
                       <span className="text-blue-500 mr-2">✓</span>
-                      Manage applications easily
+                      <TranslatedText>
+                        Manage applications easily
+                      </TranslatedText>
                     </li>
                     <li className="flex items-start">
                       <span className="text-blue-500 mr-2">✓</span>
-                      Schedule interviews seamlessly
+                      <TranslatedText>
+                        Schedule interviews seamlessly
+                      </TranslatedText>
                     </li>
                   </ul>
                   <p className="mt-3 text-sm">
-                    Streamline your hiring process with Jobzy!
+                    <TranslatedText>
+                      Streamline your hiring process with Jobzy!
+                    </TranslatedText>
                   </p>
                   <p className="mt-6 max-w-2xl">
-                    Jobzy is your trusted gateway to career success — connecting
-                    talented job seekers with top companies. Whether you're
-                    looking for your first job or your next big opportunity,
-                    Jobzy makes the process simple, fast, and effective.
+                    <TranslatedText>
+                      Jobzy is your trusted gateway to career success —
+                      connecting talented job seekers with top companies.
+                      Whether you're looking for your first job or your next big
+                      opportunity, Jobzy makes the process simple, fast, and
+                      effective.
+                    </TranslatedText>
                   </p>
                 </div>
               </div>
@@ -80,12 +98,16 @@ export default function BannerLogin() {
             <div className="z-10 relative">
               {/* <h2 className="text-2xl font-bold mb-6">Jobzy</h2> */}
               <div className="mt-20 md:mt-32">
-                <h1 className="text-3xl font-bold mb-4">Sign in to Jobzy</h1>
+                <h1 className="text-3xl font-bold mb-4">
+                  <TranslatedText>Sign in to Jobzy</TranslatedText>
+                </h1>
                 <p className="max-w-md opacity-90">
-                  Jobzy is your trusted gateway to career success — connecting
-                  talented job seekers with top companies. Whether you're
-                  looking for your first job or your next big opportunity, Jobzy
-                  makes the process simple, fast, and effective.
+                  <TranslatedText>
+                    Jobzy is your trusted gateway to career success — connecting
+                    talented job seekers with top companies. Whether you're
+                    looking for your first job or your next big opportunity,
+                    Jobzy makes the process simple, fast, and effective.
+                  </TranslatedText>
                 </p>
               </div>
             </div>

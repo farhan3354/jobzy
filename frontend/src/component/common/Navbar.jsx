@@ -18,6 +18,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { language } = useLanguage();
+  console.log("Current language:", language); // Add this line
 
   const handleLogout = () => {
     Swal.fire({

@@ -6,6 +6,7 @@ import PhoneInput from "react-phone-number-input";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import api from "../../api/register";
+import TranslatedText from "../TranslatedText";
 
 export default function RegisterForm() {
   const {
@@ -72,11 +73,15 @@ export default function RegisterForm() {
     <div className="p-8 md:p-12 md:w-1/2 flex items-center justify-center">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-lg p-8">
         <div className="mb-8 text-center">
-          <p className="mb-1 text-2xl text-blue-500 font-bold">Register</p>
+          <p className="mb-1 text-2xl text-blue-500 font-bold"><TranslatedText>
+                  Register
+                </TranslatedText></p>
           <p className="text-gray-600 text-xl">
-            {role === "employer"
+          <TranslatedText>
+                   {role === "employer"
               ? "Create your employer account"
               : "Create your job seeker account"}
+                </TranslatedText> 
           </p>
         </div>
 
@@ -113,10 +118,14 @@ export default function RegisterForm() {
                 className="w-full h-12 pl-10 pr-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none bg-white"
               >
                 <option value="" disabled>
-                  Select Role
+                  <TranslatedText>Select Role</TranslatedText>
                 </option>
-                <option value="job-seeker">Job Seeker</option>
-                <option value="employer">Employer</option>
+                <option value="job-seeker">
+                  <TranslatedText>Job Seeker</TranslatedText>
+                </option>
+                <option value="employer">
+                  <TranslatedText>Employer</TranslatedText>
+                </option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center px-2 text-gray-700">
                 <svg
@@ -172,7 +181,7 @@ export default function RegisterForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Phone Number *
+              <TranslatedText>Phone Number</TranslatedText> *
             </label>
             <div className="phone-input-wrapper">
               <PhoneInput
@@ -216,17 +225,19 @@ export default function RegisterForm() {
             type="submit"
             className="w-full h-12 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            Create Account
+            <TranslatedText>Create Account</TranslatedText>
           </button>
         </form>
 
         <div className="text-center mt-6">
-          <span className="text-gray-500">Already have an account?</span>{" "}
+          <span className="text-gray-500">
+            <TranslatedText>Already have an account?</TranslatedText>
+          </span>{" "}
           <Link
             to="/login"
             className="text-blue-500 font-medium hover:underline"
           >
-            Sign In
+            <TranslatedText>Sign In</TranslatedText>
           </Link>
         </div>
       </div>

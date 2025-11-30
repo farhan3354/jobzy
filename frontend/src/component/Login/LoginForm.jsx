@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { loginsucc } from "../../redux/slices/authslices/userslice";
 import api from "../../api/register";
+import TranslatedText from "../TranslatedText";
 
 export default function Form() {
   const {
@@ -95,7 +96,9 @@ export default function Form() {
       <div className="p-8 md:p-12 md:w-1/2 flex items-center justify-center">
         <div className="w-full max-w-md bg-white rounded-3xl shadow-lg p-8">
           <div className="mb-8 text-center">
-            <p className="mb-1 text-2xl text-blue-500 font-bold">Login</p>
+            <p className="mb-1 text-2xl text-blue-500 font-bold">
+              <TranslatedText>Login</TranslatedText>
+            </p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -104,7 +107,7 @@ export default function Form() {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Enter your username
+                <TranslatedText>Enter your username</TranslatedText>
               </label>
               <input
                 id="email"
@@ -131,7 +134,7 @@ export default function Form() {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
-                Enter your Password
+                <TranslatedText>Enter your Password</TranslatedText>
               </label>
               <input
                 id="password"
@@ -151,14 +154,16 @@ export default function Form() {
               type="submit"
               className="w-full h-12 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md transition duration-200 cursor-pointer"
             >
-              Sign in
+              <TranslatedText>Sign in</TranslatedText>
             </button>
           </form>
 
           <div className="text-left mt-4">
-            <span className="text-gray-500">No Account?</span>{" "}
+            <span className="text-gray-500">
+              <TranslatedText>No Account?</TranslatedText>
+            </span>{" "}
             <Link to="/chose-register" className="text-blue-500 font-medium">
-              Register
+              <TranslatedText>Register</TranslatedText>
             </Link>
           </div>
         </div>

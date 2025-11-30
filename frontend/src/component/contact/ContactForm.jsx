@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import TranslatedText from "../TranslatedText";
 
 export default function ContactForm() {
   const {
@@ -44,11 +45,13 @@ export default function ContactForm() {
     <>
       <div>
         <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-          Let's Connect!
+          <TranslatedText>Let's Connect!</TranslatedText>
         </h2>
         <p className="text-gray-600 mb-10">
-          Have a question, suggestion, or job inquiry? We'd love to hear from
-          you. Fill out the form and our team will get back to you shortly.
+          <TranslatedText>
+            Have a question, suggestion, or job inquiry? We'd love to hear from
+            you. Fill out the form and our team will get back to you shortly.
+          </TranslatedText>
         </p>
 
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -57,7 +60,7 @@ export default function ContactForm() {
               htmlFor="name"
               className="block text-gray-700 font-medium mb-1"
             >
-              Full Name
+              <TranslatedText>Full Name</TranslatedText>
             </label>
             <input
               type="text"
@@ -78,7 +81,7 @@ export default function ContactForm() {
               htmlFor="email"
               className="block text-gray-700 font-medium mb-1"
             >
-              Email
+              <TranslatedText>Email</TranslatedText>
             </label>
             <input
               type="email"
@@ -102,7 +105,7 @@ export default function ContactForm() {
               htmlFor="messages"
               className="block text-gray-700 font-medium mb-1"
             >
-              Message
+              <TranslatedText>Message</TranslatedText>
             </label>
             <textarea
               id="messages"
@@ -122,7 +125,7 @@ export default function ContactForm() {
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
-            Send Message
+            <TranslatedText>Send Message</TranslatedText>
           </button>
         </form>
       </div>
