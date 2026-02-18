@@ -48,7 +48,10 @@ export default function StepOneProfile({ register, errors }) {
         <label className="block mb-1 font-medium">Headline</label>
         <input
           type="text"
-          {...register("headline", { required: "Headline is required" })}
+          {...register("headline", { 
+            required: "Headline is required",
+            minLength: { value: 5, message: "Headline must be at least 5 characters" }
+          })}
           className="w-full border px-3 py-2 rounded"
         />
         {errors.headline && (
@@ -60,7 +63,13 @@ export default function StepOneProfile({ register, errors }) {
         <label className="block mb-1 font-medium">Location</label>
         <input
           type="text"
-          {...register("location", { required: "Location is required" })}
+          {...register("location", { 
+            required: "Location is required",
+            pattern: {
+              value: /^[a-zA-Z0-9\s,.-]+$/,
+              message: "Invalid characters in location"
+            }
+          })}
           className="w-full border px-3 py-2 rounded"
         />
         {errors.location && (
@@ -71,7 +80,10 @@ export default function StepOneProfile({ register, errors }) {
       <div>
         <label className="block mb-1 font-medium">About</label>
         <textarea
-          {...register("about", { required: "About is required" })}
+          {...register("about", { 
+            required: "About is required",
+            minLength: { value: 20, message: "About section must be at least 20 characters" }
+          })}
           rows="4"
           className="w-full border px-3 py-2 rounded"
         />

@@ -12,7 +12,7 @@ export default function Form() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -114,7 +114,7 @@ export default function Form() {
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
-                    value: /^\S+@\S+$/i,
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                     message: "Invalid email address",
                   },
                 })}
@@ -148,6 +148,15 @@ export default function Form() {
                   {errors.password.message}
                 </p>
               )}
+            </div>
+
+            <div className="flex justify-end items-center mb-6">
+              <Link
+                to="/forgot-password"
+                className="text-sm font-medium text-blue-600 hover:text-blue-800 transition"
+              >
+                Forgot Password?
+              </Link>
             </div>
 
             <button

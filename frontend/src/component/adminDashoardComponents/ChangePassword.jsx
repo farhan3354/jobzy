@@ -10,7 +10,7 @@ export default function ChangePassword() {
     reset,
     formState: { errors },
     watch,
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const token = useSelector((state) => state.auth.token);
   const [message, setMessage] = useState(null);
@@ -84,6 +84,10 @@ export default function ChangePassword() {
             {...register("newpassword", {
               required: "New password is required",
               minLength: { value: 6, message: "Must be at least 6 characters" },
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
+                message: "Must contain uppercase, lowercase & number",
+              },
             })}
             className="w-full border px-4 py-2 rounded focus:ring focus:ring-blue-300"
           />

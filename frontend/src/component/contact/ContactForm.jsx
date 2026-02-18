@@ -9,7 +9,7 @@ export default function ContactForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const onSubmit = async (data) => {
     try {
@@ -67,6 +67,10 @@ export default function ContactForm() {
               id="name"
               {...register("name", {
                 required: "The Name is required",
+                pattern: {
+                  value: /^[a-zA-Z\s]+$/,
+                  message: "Name should only contain letters and spaces",
+                },
               })}
               placeholder="Enter your name"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none"
@@ -88,6 +92,10 @@ export default function ContactForm() {
               id="email"
               {...register("email", {
                 required: "Email Address is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address",
+                },
               })}
               aria-invalid={errors.email ? "true" : "false"}
               placeholder="Enter your email"
@@ -114,9 +122,9 @@ export default function ContactForm() {
               rows="4"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none resize-none"
             ></textarea>
-            {errors.messages && (
+            {errors.message && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.messages.message}
+                {errors.message.message}
               </p>
             )}
           </div>

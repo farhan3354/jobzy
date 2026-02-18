@@ -32,6 +32,10 @@ export default function StepOne({ register, errors }) {
             type="text"
             {...register("companyName", {
               required: "Company name is required",
+              pattern: {
+                value: /^[a-zA-Z0-9\s.,&'-]+$/,
+                message: "Invalid characters in company name"
+              }
             })}
             placeholder="Enter your company name"
             className="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300"

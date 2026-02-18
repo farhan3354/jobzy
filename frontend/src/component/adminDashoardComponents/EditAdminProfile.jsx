@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import api from "../../api/register";
 
 export default function EditAdminProfile() {
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue } = useForm({ mode: "onBlur" });
   const token = useSelector((state) => state.auth.token);
   const [loading, setLoading] = useState(false);
   const [profilim, setProfilim] = useState(null);

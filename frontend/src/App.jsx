@@ -47,6 +47,8 @@ import CreateAdminProfile from "./component/adminDashoardComponents/CreateAdminP
 import EditAdminProfile from "./component/adminDashoardComponents/EditAdminProfile.jsx";
 import ChangePassword from "./component/adminDashoardComponents/ChangePassword.jsx";
 import OTPVerifyForm from "./component/Login/OtpVerify.jsx";
+import ForgotPassword from "./component/Login/ForgotPassword.jsx";
+import ResetPassword from "./component/Login/ResetPassword.jsx";
 import Blog from "./pages/Blog.jsx";
 import AddBlog from "./pages/AddBlog.jsx";
 import FindByIdBlog from "./component/FindByIdBlog.jsx";
@@ -71,6 +73,8 @@ function App() {
           <Route path="register/job-seeker" element={<Register />} />
           <Route path="register/employer" element={<Register />} />
           <Route path="/verify-otp" element={<OTPVerifyForm />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="contact" element={<Contact />} />
           <Route path="blog" element={<Blog />} />
           <Route path="blog/:id" element={<FindByIdBlog />} />

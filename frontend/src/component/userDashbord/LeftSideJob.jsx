@@ -6,6 +6,7 @@ import {
   FaClock,
   FaBookmark,
 } from "react-icons/fa";
+import TranslatedText from "../TranslatedText";
 
 export default function LeftSidejob({ setSelectedJob, jobs }) {
   return (
@@ -34,10 +35,10 @@ export default function LeftSidejob({ setSelectedJob, jobs }) {
                 <div className="flex justify-between items-start gap-2">
                   <div className="flex-1 min-w-0">
                     <h3 className="text-lg sm:text-xl font-semibold text-blue-600 hover:text-blue-800 truncate">
-                      {job.jobTitle}
+                      <TranslatedText>{job.jobTitle}</TranslatedText>
                     </h3>
                     <p className="text-gray-700 font-medium truncate">
-                      {job.companyName}
+                      <TranslatedText>{job.companyName}</TranslatedText>
                     </p>
                   </div>
                   <button className="text-gray-400 hover:text-yellow-500 transition flex-shrink-0">
@@ -48,7 +49,9 @@ export default function LeftSidejob({ setSelectedJob, jobs }) {
                 <div className="flex flex-wrap gap-x-4 gap-y-2 mt-3 text-sm text-gray-600">
                   <div className="flex items-center">
                     <FaMapMarkerAlt className="mr-2 flex-shrink-0" />
-                    <span className="truncate">{job.location}</span>
+                    <span className="truncate">
+                      <TranslatedText>{job.location}</TranslatedText>
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <FaBriefcase className="mr-2 flex-shrink-0" />

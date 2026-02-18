@@ -14,6 +14,7 @@ import {
 import { Link } from "react-router-dom";
 import LeftSidejob from "./LeftSideJob";
 import api from "../../api/register";
+import TranslatedText from "../TranslatedText";
 
 export default function JobList() {
   const [selectedJob, setSelectedJob] = useState(null);
@@ -207,11 +208,8 @@ export default function JobList() {
               </div>
             </div>
           </div>
-
-          {/* Mobile Layout - Single column */}
           <div className="block lg:hidden">
             <div className="space-y-4">
-              {/* Job List */}
               <div className="bg-white rounded-lg shadow-md">
                 <LeftSidejob
                   selectedJob={selectedJob}
@@ -219,20 +217,22 @@ export default function JobList() {
                   jobs={activeJobs}
                 />
               </div>
-
-              {/* Job Details - Only show when job is selected */}
               {selectedJob && (
                 <div className="bg-white rounded-lg shadow-md p-4 mt-4">
                   <div className="border-b border-gray-200 pb-4 mb-4">
                     <div className="flex flex-col gap-3">
                       <div>
                         <h2 className="text-xl font-bold text-gray-800">
-                          {selectedJob.jobTitle}
+                          <TranslatedText>
+                            {selectedJob.jobTitle}
+                          </TranslatedText>
                         </h2>
                         <div className="flex items-center mt-1">
                           <FaBuilding className="text-gray-500 mr-2 flex-shrink-0" />
                           <span className="text-gray-700 font-medium">
-                            {selectedJob.companyName}
+                            <TranslatedText>
+                              {selectedJob.companyName}
+                            </TranslatedText>
                           </span>
                         </div>
                       </div>
@@ -240,7 +240,11 @@ export default function JobList() {
                       <div className="flex flex-wrap gap-3 text-sm text-gray-600">
                         <div className="flex items-center">
                           <FaMapMarkerAlt className="mr-2 flex-shrink-0" />
-                          <span>{selectedJob.location}</span>
+                          <span>
+                            <TranslatedText>
+                              {selectedJob.location}
+                            </TranslatedText>
+                          </span>
                         </div>
                         <div className="flex items-center">
                           <FaBriefcase className="mr-2 flex-shrink-0" />
@@ -253,7 +257,9 @@ export default function JobList() {
                         <div className="flex items-center">
                           <FaClock className="mr-2 flex-shrink-0" />
                           <span>
-                            {new Date(selectedJob.createdAt).toLocaleDateString()}
+                            {new Date(
+                              selectedJob.createdAt
+                            ).toLocaleDateString()}
                           </span>
                         </div>
                       </div>
@@ -273,12 +279,16 @@ export default function JobList() {
                         Job Description
                       </h3>
                       <p className="text-gray-700">
-                        {selectedJob.jobDescription}
+                        <TranslatedText>
+                          {selectedJob.jobDescription}
+                        </TranslatedText>
                       </p>
                     </div>
 
                     <div>
-                      <h3 className="text-lg font-semibold mb-2">Requirements</h3>
+                      <h3 className="text-lg font-semibold mb-2">
+                        Requirements
+                      </h3>
                       <ul className="list-disc pl-5 text-gray-700 space-y-1">
                         {selectedJob.requirements &&
                           selectedJob.requirements.map((req, index) => (
@@ -308,7 +318,7 @@ export default function JobList() {
                         to={`/user-dashboard/apply/${selectedJob._id}`}
                         className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition font-medium text-center block"
                       >
-                        Apply Now
+                        <TranslatedText>Apply Now</TranslatedText>
                       </Link>
                     </div>
                   </div>
@@ -376,7 +386,9 @@ export default function JobList() {
                         <div className="flex items-center">
                           <FaClock className="mr-2 flex-shrink-0" />
                           <span>
-                            {new Date(selectedJob.createdAt).toLocaleDateString()}
+                            {new Date(
+                              selectedJob.createdAt
+                            ).toLocaleDateString()}
                           </span>
                         </div>
                       </div>
@@ -396,7 +408,9 @@ export default function JobList() {
                       </div>
 
                       <div>
-                        <h3 className="text-lg font-semibold mb-2">Requirements</h3>
+                        <h3 className="text-lg font-semibold mb-2">
+                          Requirements
+                        </h3>
                         <ul className="list-disc pl-5 text-gray-700 space-y-1">
                           {selectedJob.requirements &&
                             selectedJob.requirements.map((req, index) => (

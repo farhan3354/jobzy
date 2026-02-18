@@ -8,7 +8,7 @@ export default function CreateAdminProfile() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
   const token = useSelector((state) => state.auth.token);
 
   const onSubmit = async (data) => {

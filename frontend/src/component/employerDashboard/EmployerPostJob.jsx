@@ -14,7 +14,7 @@ export default function EmployerPostJob() {
     handleSubmit,
     trigger,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const navigate = useNavigate();
   const [count, setCount] = useState(1);

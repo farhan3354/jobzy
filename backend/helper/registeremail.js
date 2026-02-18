@@ -26,6 +26,18 @@ export const mailOptions = (name, email, otp) => ({
       `,
 });
 
+export const resetPasswordMailOptions = (name, email, otp) => ({
+  from: `"Your Website" <${process.env.EMAIL_USER}>`,
+  to: email,
+  subject: "Reset your password - OTP",
+  html: `
+        <h2>Hello ${name},</h2>
+        <p>Your OTP for password reset is:</p>
+        <h1>${otp}</h1>
+        <p>This code will expire in 10 minutes.</p>
+      `,
+});
+
 // interviews
 
 export const interviewMailOptions = (

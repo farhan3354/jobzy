@@ -12,7 +12,7 @@ export default function EditProfile() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
   const [profileId, setProfileId] = useState(null);
 
   const token = useSelector((state) => state.auth.token);

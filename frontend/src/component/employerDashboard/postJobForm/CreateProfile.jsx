@@ -11,7 +11,7 @@ export default function CreateProfile() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
   const token = useSelector((state) => state.auth.token);
   const onSubmit = async (data) => {
     try {

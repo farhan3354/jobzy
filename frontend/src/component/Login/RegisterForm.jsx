@@ -14,7 +14,7 @@ export default function RegisterForm() {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
   const navigate = useNavigate();
   const [role, setRole] = useState("");
   const [phoneValue, setPhoneValue] = useState("");
@@ -154,6 +154,10 @@ export default function RegisterForm() {
                 value: 2,
                 message: "Name must be at least 2 characters",
               },
+              pattern: {
+                value: /^[a-zA-Z\s]+$/,
+                message: "Name should only contain letters and spaces",
+              },
             })}
             type="text"
             placeholder="Full Name"
@@ -167,7 +171,7 @@ export default function RegisterForm() {
             {...register("email", {
               required: "Email is required",
               pattern: {
-                value: /^\S+@\S+\.\S+$/,
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 message: "Enter a valid email address",
               },
             })}

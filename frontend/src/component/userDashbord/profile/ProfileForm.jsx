@@ -14,7 +14,7 @@ export default function JobSeekerProfileForm() {
     handleSubmit,
     trigger,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
