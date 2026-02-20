@@ -14,6 +14,7 @@ export default function EditJobSeeker() {
     handleSubmit,
     trigger,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({ mode: "onBlur" });
 
@@ -143,7 +144,7 @@ export default function EditJobSeeker() {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {step === 1 && <StepOneProfile register={register} errors={errors} />}
+        {step === 1 && <StepOneProfile register={register} errors={errors} setValue={setValue} />}
         {step === 2 && <StepTwo register={register} errors={errors} />}
         {step === 3 && <StepThree register={register} errors={errors} />}
 

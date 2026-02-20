@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../../../api/register";
+import LocationAutocomplete from "../../common/LocationAutocomplete";
 
 export default function EditProfile() {
   const navigate = useNavigate();
@@ -11,8 +12,10 @@ export default function EditProfile() {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({ mode: "onBlur" });
+  const [existingLocation, setExistingLocation] = useState("");
   const [profileId, setProfileId] = useState(null);
 
   const token = useSelector((state) => state.auth.token);
@@ -30,6 +33,7 @@ export default function EditProfile() {
         );
         const data = res.data.user;
         setProfileId(data._id);
+        setExistingLocation(data.location || "");
         reset({
           companyName: data.companyName,
           companyWebsite: data.companyWebsite,
@@ -155,17 +159,14 @@ export default function EditProfile() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Location
             </label>
-            <input
-              type="text"
-              {...register("location", { required: "Location is required" })}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="City, Country"
+            <LocationAutocomplete
+              name="location"
+              register={register}
+              errors={errors}
+              setValue={setValue}
+              defaultValue={existingLocation}
+              placeholder="e.g. Lahore, Pakistan"
             />
-            {errors.location && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.location.message}
-              </p>
-            )}
           </div>
 
           {/* Description */}

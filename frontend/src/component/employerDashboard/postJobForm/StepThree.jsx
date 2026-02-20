@@ -1,25 +1,20 @@
 import React from "react";
+import LocationAutocomplete from "../../common/LocationAutocomplete";
 
-export default function StepThree({ register, errors }) {
+export default function StepThree({ register, errors, setValue }) {
   return (
     <>
       <div>
         <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
           <div>
             <label className="block text-gray-700 mb-1">Location *</label>
-            <input
-              type="text"
-              {...register("location", {
-                required: "Location is required",
-              })}
-              placeholder="e.g. New York, NY"
-              className="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300"
+            <LocationAutocomplete
+              name="location"
+              register={register}
+              errors={errors}
+              setValue={setValue}
+              placeholder="e.g. Lahore, Pakistan"
             />
-            {errors.location && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.location.message}
-              </p>
-            )}
           </div>
         </div>
 

@@ -13,6 +13,7 @@ export default function EmployerPostJob() {
     register,
     handleSubmit,
     trigger,
+    setValue,
     formState: { errors },
   } = useForm({ mode: "onBlur" });
 
@@ -91,7 +92,7 @@ export default function EmployerPostJob() {
       <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
         {count === 1 && <StepOne register={register} errors={errors} />}
         {count === 2 && <StepTwo register={register} errors={errors} />}
-        {count === 3 && <StepThree register={register} errors={errors} />}
+        {count === 3 && <StepThree register={register} errors={errors} setValue={setValue} />}
 
         <div className="flex justify-between pt-4">
           {count > 1 && (

@@ -40,8 +40,9 @@
 //   );
 // }
 import React from "react";
+import LocationAutocomplete from "../../common/LocationAutocomplete";
 
-export default function StepOneProfile({ register, errors }) {
+export default function StepOneProfile({ register, errors, setValue }) {
   return (
     <>
       <div>
@@ -61,20 +62,13 @@ export default function StepOneProfile({ register, errors }) {
 
       <div>
         <label className="block mb-1 font-medium">Location</label>
-        <input
-          type="text"
-          {...register("location", { 
-            required: "Location is required",
-            pattern: {
-              value: /^[a-zA-Z0-9\s,.-]+$/,
-              message: "Invalid characters in location"
-            }
-          })}
-          className="w-full border px-3 py-2 rounded"
+        <LocationAutocomplete
+          name="location"
+          register={register}
+          errors={errors}
+          setValue={setValue}
+          placeholder="e.g. Lahore, Pakistan"
         />
-        {errors.location && (
-          <p className="text-red-500 text-sm">{errors.location.message}</p>
-        )}
       </div>
 
       <div>

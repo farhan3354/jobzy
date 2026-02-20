@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "https://job-portal-xi-dun.vercel.app",
-  // || "http://localhost:8000",
+  // ||  "http://localhost:8000",
   timeout: 10000,
   withCredentials: false,
   headers: {
