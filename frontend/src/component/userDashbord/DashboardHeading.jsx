@@ -3,6 +3,7 @@ import { FaChartLine, FaFileAlt, FaBookmark } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import TranslatedText from "../TranslatedText";
 
 export default function DashboardHeading(userStats) {
   const user = useSelector((state) => state.auth.user.name);
@@ -31,9 +32,13 @@ export default function DashboardHeading(userStats) {
     <>
       <div className="pt-2 pb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Welcome ,{user}</h1>
+          <h1 className="text-2xl font-bold text-gray-800">
+            <TranslatedText>Welcome</TranslatedText> ,{user}
+          </h1>
           <p className="text-gray-600 mt-1">
-            Here's what's happening with your job search
+            <TranslatedText>
+              Here's what's happening with your job search
+            </TranslatedText>
           </p>
         </div>
       </div>
@@ -47,7 +52,9 @@ export default function DashboardHeading(userStats) {
               <div className="flex items-center justify-between">
                 <div className="p-3 rounded-full bg-blue-50">{stat.icon}</div>
                 <div className="text-right">
-                  <p className="text-gray-500">{stat.title}</p>
+                  <p className="text-gray-500">
+                    <TranslatedText>{stat.title}</TranslatedText>
+                  </p>
                   <p className="text-2xl font-bold">{stat.value}</p>
                 </div>
               </div>

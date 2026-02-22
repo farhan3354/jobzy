@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import img from "./../../../assets/music.svg";
 import { logout } from "./../../../redux/slices/authslices/userslice";
+import TranslatedText from "../../TranslatedText";
+import LanguageSwitcher from "../../LanguageSwitcher";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -42,12 +44,13 @@ export default function Navbar() {
           <Link to="/" className="flex items-center">
             <img src={img} className="h-8 w-8" alt="Logo" />
             <span className="ml-2 text-xl font-semibold dark:text-white">
-              Jobzy
+              <TranslatedText>Jobzy</TranslatedText>
             </span>
           </Link>
 
           <div className="flex items-center space-x-4">
             <>
+            <LanguageSwitcher />
               <Link to={profilePath}>
                 <img
                   src={
@@ -62,7 +65,7 @@ export default function Navbar() {
                 onClick={handleLogout}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium cursor-pointer"
               >
-                Logout
+                <TranslatedText>Logout</TranslatedText>
               </button>
             </>
           </div>

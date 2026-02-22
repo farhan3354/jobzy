@@ -12,6 +12,7 @@ import { MdWorkOutline, MdBusinessCenter } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import api from "../../api/register";
+import TranslatedText from "../TranslatedText";
 
 const UserDashboard = () => {
   const [jobs, setJobs] = useState([]);
@@ -76,18 +77,18 @@ const UserDashboard = () => {
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">
-                Recommended Jobs
+              <h2 className="text-xl font-bold text-gray-900 tracking-tight">
+                <TranslatedText>Recommended Jobs</TranslatedText>
               </h2>
-              <p className="text-gray-600 mt-1">
-                Latest opportunities matching your profile
+              <p className="text-gray-500 mt-1 font-medium text-sm">
+                <TranslatedText>Latest opportunities matching your profile</TranslatedText>
               </p>
             </div>
             <Link
               to="jobs"
-              className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium"
+              className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-bold text-sm bg-blue-50 px-4 py-2 rounded-xl transition-all"
             >
-              <span>View All Jobs</span>
+              <span><TranslatedText>View All Jobs</TranslatedText></span>
               <FiSearch className="text-lg" />
             </Link>
           </div>
@@ -107,11 +108,11 @@ const UserDashboard = () => {
                         <MdWorkOutline className="text-2xl text-blue-600" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition duration-200">
-                          {job.jobTitle}
+                        <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition duration-200">
+                          <TranslatedText>{job.jobTitle}</TranslatedText>
                         </h3>
-                        <p className="text-sm text-gray-600">
-                          {job.companyName}
+                        <p className="text-sm text-gray-500 font-medium">
+                          <TranslatedText>{job.companyName}</TranslatedText>
                         </p>
                       </div>
                     </div>
@@ -129,17 +130,17 @@ const UserDashboard = () => {
                   </div>
 
                   <div className="space-y-3 mb-4">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FiMapPin className="mr-2" />
-                      <span>{job.location}</span>
+                    <div className="flex items-center text-sm text-gray-500 font-medium">
+                      <FiMapPin className="mr-2 text-blue-400" />
+                      <span><TranslatedText>{job.location}</TranslatedText></span>
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FiDollarSign className="mr-2" />
-                      <span>{formatSalary(job.salary)}</span>
+                    <div className="flex items-center text-sm text-gray-500 font-medium">
+                      <FiDollarSign className="mr-2 text-blue-400" />
+                      <span className="text-blue-600 font-bold"><TranslatedText>{formatSalary(job.salary)}</TranslatedText></span>
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FiClock className="mr-2" />
-                      <span>{job.employmentType}</span>
+                    <div className="flex items-center text-sm text-gray-500 font-medium">
+                      <FiClock className="mr-2 text-blue-400" />
+                      <span><TranslatedText>{job.employmentType}</TranslatedText></span>
                     </div>
                   </div>
 
@@ -167,9 +168,9 @@ const UserDashboard = () => {
                     </span>
                     <Link
                       to={`jobs`}
-                      className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                      className="text-blue-600 hover:text-blue-700 text-sm font-bold flex items-center gap-1 group/btn"
                     >
-                      View Details →
+                      <TranslatedText>View Details</TranslatedText> <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
                     </Link>
                   </div>
                 </div>
@@ -206,9 +207,9 @@ const UserDashboard = () => {
           </p>
           <Link
             to="profile"
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-bold"
           >
-            Edit Profile →
+            <TranslatedText>Edit Profile</TranslatedText> →
           </Link>
         </div>
 
@@ -221,9 +222,9 @@ const UserDashboard = () => {
           </p>
           <Link
             to="applied"
-            className="inline-flex items-center text-green-600 hover:text-green-700 font-medium"
+            className="inline-flex items-center text-green-600 hover:text-green-700 font-bold"
           >
-            View Applications →
+            <TranslatedText>View Applications</TranslatedText> →
           </Link>
         </div>
       </div>
