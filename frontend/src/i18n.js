@@ -4,9 +4,7 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
-      website: {
-        name: "Jobzy",
-      },
+        name: "Jobzy World",
       "hero.title": "Find Your Dream Job Today",
       "hero.subtitle":
         "Thousands of jobs in technology, business, and more. Start your career journey with us.",
@@ -36,9 +34,7 @@ const resources = {
   },
   ar: {
     translation: {
-      website: {
-        name: "جوبزي",
-      },
+        name: "جوبزي وورلد",
       "hero.title": "ابحث عن وظيفة أحلامك اليوم",
       "hero.subtitle":
         "الآلاف من الوظائف في التكنولوجيا والأعمال والمزيد. ابدأ رحلتك المهنية معنا.",

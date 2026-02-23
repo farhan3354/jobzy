@@ -19,7 +19,7 @@ export default function Details() {
                 <TranslatedText>
                   Finding a fulfilling career or the ideal candidate shouldn't
                   feel like searching for a needle in a haystack. That's why we
-                  built jobzy. We are a dynamic job portal dedicated to
+                  built Jobzy World. We are a dynamic job portal dedicated to
                   simplifying the entire hiring process. For Job Seekers, we
                   offer a personalized platform to discover roles that align
                   with your skills and aspirations. Create a powerful profile,

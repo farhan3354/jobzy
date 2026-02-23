@@ -149,8 +149,8 @@ export const updateProfile = async (req, res) => {
     }
 
     // const resumeUrl = req.file?.path || existingProfile.seekerresumeUrl;
-    const profileImageUrl = req.files?.profileImage?.[0]?.path || null;
-    const resumeUrl = req.files?.resume?.[0]?.path || null;
+    const profileImageUrl = req.files?.profileImage?.[0]?.path || existingProfile.profileImage;
+    const resumeUrl = req.files?.resume?.[0]?.path || existingProfile.seekerresumeUrl;
 
     const updatedProfile = await JobSeekerProfile.findByIdAndUpdate(
       profileId,

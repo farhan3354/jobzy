@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import img from "./../../../assets/music.svg";
+import logo from "./../../../assets/jobzyworldlogo.jfif";
 import { logout } from "./../../../redux/slices/authslices/userslice";
 
 export default function EmployerHeader() {
@@ -46,10 +46,7 @@ export default function EmployerHeader() {
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center">
-            <img src={img} className="h-8 w-8" alt="Logo" />
-            <span className="ml-2 text-xl font-semibold dark:text-white">
-              Jobzy
-            </span>
+            <img src={logo} className="h-10 w-auto object-contain" alt="Jobzy World Logo" />
           </Link>
 
           <div className="flex items-center space-x-4">

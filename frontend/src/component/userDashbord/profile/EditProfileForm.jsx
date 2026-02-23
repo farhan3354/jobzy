@@ -138,41 +138,47 @@ export default function EditJobSeeker() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8 bg-white shadow rounded">
-      <h2 className="text-2xl font-bold mb-6 text-center">
-        Edit Your Job Seeker Profile
+    <div className="max-w-3xl mx-auto px-6 py-10 bg-white shadow-xl rounded-[2rem] border border-gray-100 animate-slide-up">
+      <h2 className="text-3xl font-extrabold mb-2 text-center text-gray-900">
+        Update Your Professional Profile
       </h2>
+      <p className="text-gray-500 text-center mb-8 pb-4 border-b border-gray-100 italic">
+        Step {step} of 3: {step === 1 ? "Basic Information" : step === 2 ? "Experience" : "Education & Skills"}
+      </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {step === 1 && <StepOneProfile register={register} errors={errors} setValue={setValue} />}
+        {step === 1 && <StepOneProfile register={register} errors={errors} setValue={setValue} isEdit={true} />}
         {step === 2 && <StepTwo register={register} errors={errors} />}
-        {step === 3 && <StepThree register={register} errors={errors} />}
+        {step === 3 && <StepThree register={register} errors={errors} isEdit={true} setValue={setValue} />}
 
-        <div className="flex justify-between pt-4">
-          {step > 1 && (
+        <div className="flex justify-between items-center pt-8 border-t border-gray-100 mt-10">
+          {step > 1 ? (
             <button
               type="button"
               onClick={prevStep}
-              className="px-4 py-2 bg-gray-300 rounded"
+              className="px-6 py-2.5 bg-white border-2 border-gray-200 text-gray-600 rounded-xl font-semibold hover:bg-gray-50 hover:border-gray-300 transition-all flex items-center space-x-2"
             >
-              Back
+              <span>Back</span>
             </button>
+          ) : (
+            <div />
           )}
-          {step < 3 && (
+          
+          {step < 3 ? (
             <button
               type="button"
               onClick={nextStep}
-              className="ml-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-8 py-2.5 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-md hover:shadow-lg transform active:scale-95 transition-all"
             >
-              Next
+              Continue
             </button>
-          )}
-          {step === 3 && (
+          ) : (
             <button
-              type="submit"
-              className="ml-auto px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              type="button"
+              onClick={handleSubmit(onSubmit)}
+              className="px-8 py-2.5 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 shadow-md hover:shadow-lg transform active:scale-95 transition-all"
             >
-              Update Profile
+              Save Changes
             </button>
           )}
         </div>

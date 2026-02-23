@@ -3,7 +3,7 @@ import { navItems } from "../../data/data";
 import { Link, useNavigate } from "react-router-dom";
 import { CgMenu } from "react-icons/cg";
 import { RxCross2 } from "react-icons/rx";
-import img from "./../../assets/music.svg";
+import logo from "./../../assets/jobzyworldlogo.jfif";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { logout } from "../../redux/slices/authslices/userslice";
@@ -50,10 +50,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className="flex items-center">
-                <img src={img} className="h-8 w-8" alt="Logo" />
-                <span className="ml-2 text-xl font-semibold dark:text-white">
-                  <TranslatedText>Jobzy</TranslatedText>
-                </span>
+                <img src={logo} className="h-10 w-auto object-contain" alt="Jobzy World Logo" />
               </Link>
             </div>
 
