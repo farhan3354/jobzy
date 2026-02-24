@@ -7,9 +7,11 @@ import {
   FiUser,
   FiFileText,
   FiArrowLeft,
+  FiLink,
 } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import api from "../../api/register";
+import Swal from "sweetalert2";
 
 const ScheduleInterview = () => {
   const { id } = useParams();
@@ -19,7 +21,7 @@ const ScheduleInterview = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const onSubmit = async (data) => {
     try {
@@ -28,138 +30,191 @@ const ScheduleInterview = () => {
         data,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(respo);
-      navigate(`/employer-dashboard/view-interviews`);
+      
+      if (respo.data.success || respo.status === 200 || respo.status === 201) {
+        Swal.fire({
+          icon: "success",
+          title: "Interview Scheduled",
+          text: "The candidate has been notified.",
+          timer: 2000,
+          showConfirmButton: false
+        });
+        navigate(`/employer-dashboard/view-interviews`);
+      }
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Scheduling Failed",
+        text: "Could not schedule the interview. Please try again.",
+      });
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
-      <div className="max-w-2xl mx-auto">
-        <div className="mb-4">
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <div className="mb-6 flex items-center justify-between">
           <Link
             to={`/employer-dashboard/applicant/${id}`}
-            className="flex items-center text-blue-600 hover:text-blue-800 mb-4"
+            className="flex items-center text-gray-600 hover:text-blue-600 font-medium transition-colors"
           >
-            <FiArrowLeft className="mr-2" /> Back to Applicant Details
+            <FiArrowLeft className="mr-2" /> Back to Applicant
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-            Schedule Interview
-          </h1>
-          <p className="text-sm sm:text-base text-gray-600 mt-1">
-            Set up an interview with the candidate
-          </p>
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+            Interview Setup
+          </span>
         </div>
 
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <form onSubmit={handleSubmit(onSubmit)} className="p-6">
+        <div className="bg-white shadow-2xl rounded-2xl p-8 border border-gray-100 animate-slide-up">
+          <div className="text-center mb-10">
+            <h1 className="text-3xl font-extrabold text-gray-900">
+              Schedule Interview
+            </h1>
+            <p className="text-gray-500 mt-2 italic">
+              Set a date and time to meet with your potential candidate.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Interview Date */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Interview Date
+                <label htmlFor="date" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+                  Interview Date <span className="text-red-500">*</span>
                 </label>
-                <input
-                  type="date"
-                  {...register("date", {
-                    required: "Interview date is required",
-                  })}
-                  className="pl-10 w-full border border-gray-300 rounded-md py-2 px-3"
-                />
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FiCalendar className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <input
+                    id="date"
+                    type="date"
+                    {...register("date", {
+                      required: "Interview date is required",
+                    })}
+                    className={`pl-10 w-full border px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all ${
+                      errors.date ? "border-red-500" : "border-gray-300"
+                    }`}
+                  />
+                </div>
                 {errors.date && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.date.message}
-                  </p>
+                  <p className="text-red-500 text-xs mt-1 italic">{errors.date.message}</p>
                 )}
               </div>
 
+              {/* Interview Time */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Interview Time
+                <label htmlFor="time" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+                  Interview Time <span className="text-red-500">*</span>
                 </label>
-                <input
-                  type="time"
-                  {...register("time", {
-                    required: "Interview time is required",
-                  })}
-                  className="pl-10 w-full border border-gray-300 rounded-md py-2 px-3"
-                />
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FiClock className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <input
+                    id="time"
+                    type="time"
+                    {...register("time", {
+                      required: "Interview time is required",
+                    })}
+                    className={`pl-10 w-full border px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all ${
+                      errors.time ? "border-red-500" : "border-gray-300"
+                    }`}
+                  />
+                </div>
                 {errors.time && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.time.message}
-                  </p>
+                  <p className="text-red-500 text-xs mt-1 italic">{errors.time.message}</p>
                 )}
               </div>
 
+              {/* Interviewer Name */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Interviewer Name
+                <label htmlFor="interviewername" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+                  Interviewer Name <span className="text-red-500">*</span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="Interviewer name"
-                  {...register("interviewername", {
-                    required: "Interviewer name is required",
-                  })}
-                  className="pl-10 w-full border border-gray-300 rounded-md py-2 px-3"
-                />
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FiUser className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <input
+                    id="interviewername"
+                    type="text"
+                    placeholder="e.g. John Doe"
+                    {...register("interviewername", {
+                      required: "Interviewer name is required",
+                    })}
+                    className={`pl-10 w-full border px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all ${
+                      errors.interviewername ? "border-red-500" : "border-gray-300"
+                    }`}
+                  />
+                </div>
                 {errors.interviewername && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.interviewername.message}
-                  </p>
+                  <p className="text-red-500 text-xs mt-1 italic">{errors.interviewername.message}</p>
                 )}
               </div>
 
+              {/* Meeting URL */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Meeting URL
+                <label htmlFor="meetingurl" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+                  Meeting URL <span className="text-red-500">*</span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="https://meet.example.com/room"
-                  {...register("meetingurl", {
-                    required: "Meeting URL is required",
-                  })}
-                  className="w-full border border-gray-300 rounded-md py-2 px-3"
-                />
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FiLink className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <input
+                    id="meetingurl"
+                    type="url"
+                    placeholder="https://meet.google.com/xxx-xxxx-xxx"
+                    {...register("meetingurl", {
+                      required: "Meeting URL is required",
+                      pattern: {
+                        value: /^(https?:\/\/)?[\w.-]+\.[a-z]{2,}(\S*)?$/,
+                        message: "Enter a valid URL",
+                      },
+                    })}
+                    className={`pl-10 w-full border px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all ${
+                      errors.meetingurl ? "border-red-500" : "border-gray-300"
+                    }`}
+                  />
+                </div>
                 {errors.meetingurl && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.meetingurl.message}
-                  </p>
+                  <p className="text-red-500 text-xs mt-1 italic">{errors.meetingurl.message}</p>
                 )}
               </div>
 
+              {/* Notes/Agenda */}
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Notes/Agenda
+                <label htmlFor="notes" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+                  Notes / Agenda
                 </label>
                 <div className="relative">
                   <div className="absolute top-3 left-3 pointer-events-none">
                     <FiFileText className="h-5 w-5 text-gray-400" />
                   </div>
                   <textarea
+                    id="notes"
                     {...register("notes")}
                     rows={4}
-                    placeholder="Add any notes or agenda items for the interview..."
-                    className="pl-10 w-full border border-gray-300 rounded-md py-2 px-3"
+                    placeholder="Briefly describe what will be discussed..."
+                    className="pl-10 w-full border border-gray-300 rounded-lg py-2.5 px-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none"
                   ></textarea>
-                  {errors.notes && <p>{errors.notes.message}</p>}
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 flex justify-end space-x-3">
+            <div className="pt-8 flex space-x-4 border-t border-gray-100">
               <button
                 type="button"
-                onClick={() => navigate(`/employer-dashboard/applicants`)}
-                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
+                onClick={() => navigate(-1)}
+                className="flex-1 px-8 py-3 border-2 border-gray-200 text-gray-600 rounded-xl font-bold hover:bg-gray-50 transition-all active:scale-95"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                className="flex-[2] px-8 py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 shadow-md hover:shadow-lg transform active:scale-95 transition-all text-center"
               >
                 Schedule Interview
               </button>
@@ -172,215 +227,3 @@ const ScheduleInterview = () => {
 };
 
 export default ScheduleInterview;
-
-// import React, { useState } from "react";
-// import { useParams, useNavigate,Link } from "react-router-dom";
-// import {
-//   FiMail,
-//   FiPhone,
-//   FiMapPin,
-//   FiBriefcase,
-//   FiDownload,
-//   FiArrowLeft,
-//   FiCalendar,
-//   FiClock,
-//   FiUser,
-//   FiFileText,
-// } from "react-icons/fi";
-
-// const ScheduleInterview = () => {
-//   const { id } = useParams();
-//   const navigate = useNavigate();
-
-//   const [formData, setformData] = useState({
-//     date: "",
-//     time: "",
-//     duration: "",
-//     interviewer: "",
-//     interviewType: "",
-//     location: "",
-//     notes: "",
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setformData((pre) => ({ ...pre, [name]: value }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     alert(`Interview scheduled for ${formData.date} at ${formData.time}`);
-//     navigate(`/employer-dashboard/view-interviews`);
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gray-50 py-8 px-4">
-//       <div className="max-w-2xl mx-auto">
-//         <div className="mb-8">
-//           <Link
-//             to={`/employer-dashboard/applicant/${id}`}
-//             className="flex items-center text-blue-600 hover:text-blue-800 mb-4"
-//           >
-//             <FiArrowLeft className="mr-2" /> Back to Applicant Details
-//           </Link>
-//           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-//             Schedule Interview
-//           </h1>
-//           <p className="text-sm sm:text-base text-gray-600 mt-1">
-//             Set up an interview with the candidate
-//           </p>
-//         </div>
-
-//         <div className="bg-white rounded-lg shadow overflow-hidden">
-//           <form onSubmit={handleSubmit} className="p-6">
-//             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//               <div className="md:col-span-1">
-//                 <label className="block text-sm font-medium text-gray-700 mb-1">
-//                   Interview Date
-//                 </label>
-//                 <div className="relative">
-//                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-//                     <FiCalendar className="h-5 w-5 text-gray-400" />
-//                   </div>
-//                   <input
-//                     type="date"
-//                     name="date"
-//                     value={formData.date}
-//                     onChange={handleChange}
-//                     className="pl-10 w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-//                     required
-//                   />
-//                 </div>
-//               </div>
-
-//               <div className="md:col-span-1">
-//                 <label className="block text-sm font-medium text-gray-700 mb-1">
-//                   Interview Time
-//                 </label>
-//                 <div className="relative">
-//                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-//                     <FiClock className="h-5 w-5 text-gray-400" />
-//                   </div>
-//                   <input
-//                     type="time"
-//                     name="time"
-//                     value={formData.time}
-//                     onChange={handleChange}
-//                     className="pl-10 w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-//                     required
-//                   />
-//                 </div>
-//               </div>
-
-//               <div className="md:col-span-1">
-//                 <label className="block text-sm font-medium text-gray-700 mb-1">
-//                   Duration (minutes)
-//                 </label>
-//                 <select
-//                   name="duration"
-//                   value={formData.duration}
-//                   onChange={handleChange}
-//                   className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-//                 >
-//                   <option value="30">30 minutes</option>
-//                   <option value="45">45 minutes</option>
-//                   <option value="60">60 minutes</option>
-//                   <option value="90">90 minutes</option>
-//                 </select>
-//               </div>
-
-//               <div className="md:col-span-1">
-//                 <label className="block text-sm font-medium text-gray-700 mb-1">
-//                   Interviewer
-//                 </label>
-//                 <div className="relative">
-//                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-//                     <FiUser className="h-5 w-5 text-gray-400" />
-//                   </div>
-//                   <input
-//                     type="text"
-//                     name="interviewer"
-//                     value={formData.interviewer}
-//                     onChange={handleChange}
-//                     placeholder="Interviewer name"
-//                     className="pl-10 w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-//                     required
-//                   />
-//                 </div>
-//               </div>
-
-//               <div className="md:col-span-1">
-//                 <label className="block text-sm font-medium text-gray-700 mb-1">
-//                   Interview Type
-//                 </label>
-//                 <select
-//                   name="interviewType"
-//                   value={formData.interviewType}
-//                   onChange={handleChange}
-//                   className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-//                 >
-//                   <option value="online">online</option>
-//                   <option value="phone">Phone Call</option>
-//                 </select>
-//               </div>
-
-//               <div className="md:col-span-1">
-//                 <label className="block text-sm font-medium text-gray-700 mb-1">
-//                   {formData.interviewType === "in-person"
-//                     ? "Location"
-//                     : "Meeting URL"}
-//                 </label>
-//                 <input
-//                   type="text"
-//                   name="location"
-//                   value={formData.location}
-//                   onChange={handleChange}
-//                   placeholder={"https://meet.example.com/room"}
-//                   className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-//                   required
-//                 />
-//               </div>
-
-//               <div className="md:col-span-2">
-//                 <label className="block text-sm font-medium text-gray-700 mb-1">
-//                   Notes/Agenda
-//                 </label>
-//                 <div className="relative">
-//                   <div className="absolute top-3 left-3 pointer-events-none">
-//                     <FiFileText className="h-5 w-5 text-gray-400" />
-//                   </div>
-//                   <textarea
-//                     name="notes"
-//                     value={formData.notes}
-//                     onChange={handleChange}
-//                     rows={4}
-//                     placeholder="Add any notes or agenda items for the interview..."
-//                     className="pl-10 w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-//                   ></textarea>
-//                 </div>
-//               </div>
-//             </div>
-
-//             <div className="mt-8 flex justify-end space-x-3">
-//               <button
-//                 type="button"
-//                 onClick={() => navigate(`/employer-dashboard/applicants`)}
-//                 className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
-//               >
-//                 Cancel
-//               </button>
-//               <button
-//                 type="submit"
-//                 className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-//               >
-//                 Schedule Interview
-//               </button>
-//             </div>
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ScheduleInterview;

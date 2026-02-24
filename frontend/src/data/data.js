@@ -238,12 +238,50 @@ export const employmentTypes = [
 ];
 
 export const experienceLevels = [
+  "No Experience Required",
   "Internship",
   "Entry level",
   "Associate",
   "Mid-Senior level",
   "Director",
   "Executive",
+];
+
+export const jobSchedules = [
+  "8 hour shift",
+  "10 hour shift",
+  "12 hour shift",
+  "Monday to Friday",
+  "Weekend availability",
+  "Day shift",
+  "Night shift",
+  "Overtime",
+  "Holidays",
+];
+
+export const benefitsList = [
+  "Health insurance",
+  "Health savings account",
+  "Dental insurance",
+  "Vision insurance",
+  "Life insurance",
+  "AD&D insurance",
+  "401(k)",
+  "401(k) matching",
+  "Paid time off",
+  "Flexible schedule",
+  "Remote work",
+  "Employee discount",
+  "Referral program",
+  "Professional development assistance",
+  "Tuition reimbursement",
+];
+
+export const hiringTimelines = [
+  "1-3 days",
+  "Within 2 weeks",
+  "2-4 weeks",
+  "Over a month",
 ];
 
 export const industries = [

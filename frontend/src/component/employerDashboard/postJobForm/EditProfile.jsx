@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../../../api/register";
 import LocationAutocomplete from "../../common/LocationAutocomplete";
+import { industries } from "../../../data/data";
+import StaticAutocomplete from "../../common/StaticAutocomplete";
 
 export default function EditProfile() {
   const navigate = useNavigate();
@@ -41,7 +43,6 @@ export default function EditProfile() {
           location: data.location,
           description: data.description,
           companysize: data.companysize,
-          companylogo: data.companylogo,
         });
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -76,88 +77,90 @@ export default function EditProfile() {
           },
         }
       );
-      toast.success("Profile Update successfully");
+      toast.success("Profile updated successfully");
       console.log(repo);
-      navigate("employer-dashboard/profile");
+      navigate("/employer-dashboard/profile");
     } catch (error) {
       console.error("Update failed:", error.response?.data || error.message);
+      toast.error("Failed to update profile");
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="bg-white shadow-md rounded-xl p-8 w-full max-w-2xl">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-2xl border border-gray-100 animate-slide-up">
+        <h2 className="text-3xl font-extrabold text-gray-900 mb-2 text-center">
           Edit Company Profile
         </h2>
+        <p className="text-gray-500 text-center mb-8 italic">
+          Keep your company information up to date.
+        </p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          {/* Company Name */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Company Name
-            </label>
-            <input
-              type="text"
-              {...register("companyName", {
-                required: "Company name is required",
-              })}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="Enter company name"
-            />
-            {errors.companyName && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.companyName.message}
-              </p>
-            )}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="companyName" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+                Company Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="companyName"
+                type="text"
+                {...register("companyName", {
+                  required: "Company name is required",
+                })}
+                className={`w-full border px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all ${
+                  errors.companyName ? "border-red-500" : "border-gray-300"
+                }`}
+                placeholder="Enter company name"
+              />
+              {errors.companyName && (
+                <p className="text-red-500 text-xs mt-1 italic">{errors.companyName.message}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="companyWebsite" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+                Company Website <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="companyWebsite"
+                type="url"
+                {...register("companyWebsite", {
+                  required: "Website is required",
+                  pattern: {
+                    value: /^(https?:\/\/)?[\w.-]+\.[a-z]{2,}(\S*)?$/,
+                    message: "Enter a valid URL",
+                  },
+                })}
+                className={`w-full border px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all ${
+                  errors.companyWebsite ? "border-red-500" : "border-gray-300"
+                }`}
+                placeholder="https://example.com"
+              />
+              {errors.companyWebsite && (
+                <p className="text-red-500 text-xs mt-1 italic">{errors.companyWebsite.message}</p>
+              )}
+            </div>
           </div>
 
-          {/* Company Website */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Company Website
+            <label htmlFor="industry" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+              Industry <span className="text-red-500">*</span>
             </label>
-            <input
-              type="url"
-              {...register("companyWebsite", {
-                required: "Website is required",
-                pattern: {
-                  value: /^(https?:\/\/)?[\w.-]+\.[a-z]{2,}(\S*)?$/,
-                  message: "Enter a valid URL",
-                },
-              })}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="https://example.com"
+            <StaticAutocomplete
+              name="industry"
+              register={register}
+              errors={errors}
+              setValue={setValue}
+              options={industries}
+              placeholder="Select industry"
+              validation={{ required: "Industry is required" }}
             />
-            {errors.companyWebsite && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.companyWebsite.message}
-              </p>
-            )}
           </div>
 
-          {/* Industry */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Industry
-            </label>
-            <input
-              type="text"
-              {...register("industry", { required: "Industry is required" })}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="E.g. Software, Finance"
-            />
-            {errors.industry && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.industry.message}
-              </p>
-            )}
-          </div>
-
-          {/* Location */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Location
+            <label htmlFor="location" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+              Location <span className="text-red-500">*</span>
             </label>
             <LocationAutocomplete
               name="location"
@@ -169,70 +172,83 @@ export default function EditProfile() {
             />
           </div>
 
-          {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Description
+            <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+              Description <span className="text-red-500">*</span>
             </label>
             <textarea
+              id="description"
               rows="4"
               {...register("description", {
                 required: "Description is required",
               })}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+              className={`w-full border px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none ${
+                errors.description ? "border-red-500" : "border-gray-300"
+              }`}
               placeholder="Write a short company description..."
             />
             {errors.description && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.description.message}
-              </p>
+              <p className="text-red-500 text-xs mt-1 italic">{errors.description.message}</p>
             )}
           </div>
 
-          {/* Company Size */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Company Size
-            </label>
-            <select
-              {...register("companysize", {
-                required: "Company size is required",
-              })}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="companysize" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+                Company Size <span className="text-red-500">*</span>
+              </label>
+              <select
+                id="companysize"
+                {...register("companysize", {
+                  required: "Company size is required",
+                })}
+                className={`w-full border px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-white cursor-pointer ${
+                  errors.companysize ? "border-red-500" : "border-gray-300"
+                }`}
+              >
+                <option value="">Select Size</option>
+                <option value="1-10">1-10 employees</option>
+                <option value="11-50">11-50 employees</option>
+                <option value="51-200">51-200 employees</option>
+                <option value="201-500">201-500 employees</option>
+                <option value="500+">500+ employees</option>
+              </select>
+              {errors.companysize && (
+                <p className="text-red-500 text-xs mt-1 italic">{errors.companysize.message}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="companylogo" className="block text-sm font-semibold text-gray-700 mb-1 cursor-pointer">
+                Company Logo <span className="text-sm font-normal text-gray-400 ml-1">(Optional)</span>
+              </label>
+              <input
+                id="companylogo"
+                type="file"
+                accept="image/*"
+                {...register("companylogo")}
+                className={`w-full border px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 ${
+                  errors.companylogo ? "border-red-500" : "border-gray-300"
+                }`}
+              />
+            </div>
+          </div>
+
+          <div className="flex space-x-4 pt-4">
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="flex-1 px-4 py-3 border-2 border-gray-200 text-gray-600 rounded-xl font-bold hover:bg-gray-50 hover:border-gray-300 transition-all"
             >
-              <option value="">Select Size</option>
-              <option value="1-10">1-10</option>
-              <option value="11-50">11-50</option>
-              <option value="51-200">51-200</option>
-              <option value="201-500">201-500</option>
-              <option value="500+">500+</option>
-            </select>
-            {errors.companysize && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.companysize.message}
-              </p>
-            )}
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="flex-[2] bg-blue-600 text-white font-bold py-3 px-4 rounded-xl hover:bg-blue-700 shadow-md hover:shadow-lg active:scale-95 transition transform duration-200"
+            >
+              Update Profile
+            </button>
           </div>
-
-          {/* Company Logo */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Company Logo
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              {...register("companylogo")}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white font-medium py-2.5 px-4 rounded-lg hover:bg-blue-700 active:scale-95 transition transform duration-200"
-          >
-            Update Profile
-          </button>
         </form>
       </div>
     </div>

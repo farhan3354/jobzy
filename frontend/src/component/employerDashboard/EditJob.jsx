@@ -6,6 +6,7 @@ import StepOne from "./postJobForm/StepOne";
 import StepTwo from "./postJobForm/StepTwo";
 import StepThree from "./postJobForm/StepThree";
 import api from "../../api/register";
+import Swal from "sweetalert2";
 
 const EditJob = () => {
   const {
@@ -13,8 +14,9 @@ const EditJob = () => {
     handleSubmit,
     trigger,
     reset,
+    setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const { id } = useParams();
   const token = useSelector((state) => state.auth.token);
@@ -28,13 +30,20 @@ const EditJob = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      setJob(res.data.job);
+      const jobData = res.data.job;
+      setJob(jobData);
       reset({
-        ...res.data.job,
-        requirements: res.data.job.requirements.join("\n"),
+        ...jobData,
+        requirements: Array.isArray(jobData.requirements) ? jobData.requirements.join("\n") : jobData.requirements,
+        skills: Array.isArray(jobData.skills) ? jobData.skills.join(", ") : jobData.skills,
       });
     } catch (error) {
       console.log("Error fetching job:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to fetch job details",
+      });
     }
   };
 
@@ -46,14 +55,12 @@ const EditJob = () => {
     try {
       const formattedData = {
         ...data,
-        requirements: data.requirements
-          .split("\n")
-          .map((r) => r.trim())
-          .filter((r) => r !== ""),
-        skills: data.skills
-          .split(",")
-          .map((s) => s.trim())
-          .filter((s) => s !== ""),
+        requirements: typeof data.requirements === "string" 
+          ? data.requirements.split("\n").map((r) => r.trim()).filter((r) => r !== "")
+          : data.requirements,
+        skills: typeof data.skills === "string"
+          ? data.skills.split(",").map((s) => s.trim()).filter((s) => s !== "")
+          : data.skills,
       };
 
       const res = await api.put(
@@ -63,12 +70,22 @@ const EditJob = () => {
       );
 
       if (res.data.success) {
-        alert("Job updated successfully!");
+        Swal.fire({
+          icon: "success",
+          title: "Updated!",
+          text: "Job has been updated successfully.",
+          timer: 2000,
+          showConfirmButton: false
+        });
         navigate("/employer-dashboard/all-job");
       }
     } catch (error) {
       console.log("Error updating job:", error);
-      alert("Failed to update job");
+      Swal.fire({
+        icon: "error",
+        title: "Update Failed",
+        text: "Something went wrong while updating the job.",
+      });
     }
   };
 
@@ -81,7 +98,8 @@ const EditJob = () => {
         "requirements",
         "experienceLevel",
         "industry",
-        "status",
+        "employmentType",
+        "numberOfOpenings",
       ]);
     } else {
       valid = true;
@@ -91,53 +109,92 @@ const EditJob = () => {
 
   const prevStep = () => setCount((prev) => prev - 1);
 
-  if (!job) return <div className="text-center">Loading job details...</div>;
+  if (!job) return (
+    <div className="flex justify-center items-center min-h-[400px]">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    </div>
+  );
 
   return (
-    <div className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Edit Job</h2>
+    <div className="max-w-4xl mx-auto bg-white shadow-2xl rounded-2xl p-8 border border-gray-100 animate-slide-up">
+      <h2 className="text-3xl font-extrabold mb-2 text-gray-900 text-center">
+        Edit Job Posting
+      </h2>
+      <p className="text-gray-500 text-center mb-8 pb-4 border-b border-gray-100 italic">
+        Step {count} of 3: {count === 1 ? "Job Details" : count === 2 ? "Requirements" : "Location & Finalize"}
+      </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {count === 1 && <StepOne register={register} errors={errors} />}
-        {count === 2 && <StepTwo register={register} errors={errors} />}
-        {count === 3 && <StepThree register={register} errors={errors} />}
+        {count === 2 && (
+          <StepTwo 
+            register={register} 
+            errors={errors} 
+            setValue={setValue} 
+          />
+        )}
+        {count === 3 && (
+          <StepThree 
+            register={register} 
+            errors={errors} 
+            setValue={setValue} 
+          />
+        )}
 
-        <div className="flex justify-between pt-4">
-          {count > 1 && (
-            <button
-              type="button"
-              onClick={prevStep}
-              className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition cursor-pointer"
-            >
-              Back
-            </button>
-          )}
-
-          {count < 3 ? (
-            <button
-              type="button"
-              onClick={nextStep}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer"
-            >
-              Next
-            </button>
-          ) : (
-            <div className="flex justify-between gap-3">
-              <button
-                type="submit"
-                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer "
-              >
-                Update Job
-              </button>
+        <div className="flex justify-between items-center pt-8 border-t border-gray-100 mt-10">
+          <div className="flex space-x-4">
+            {count > 1 ? (
               <button
                 type="button"
-                onClick={() => reset(job)}
-                className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition cursor-pointer"
+                onClick={prevStep}
+                className="px-8 py-2.5 border-2 border-gray-200 text-gray-600 rounded-xl font-bold hover:bg-gray-50 hover:border-gray-300 transition-all flex items-center"
               >
-                Reset
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="15 19l-7-7 7-7" />
+                </svg>
+                Back
               </button>
-            </div>
-          )}
+            ) : (
+              <button
+                type="button"
+                onClick={() => navigate(-1)}
+                className="px-8 py-2.5 border-2 border-red-100 text-red-600 rounded-xl font-bold hover:bg-red-50 hover:border-red-200 transition-all"
+              >
+                Cancel
+              </button>
+            )}
+          </div>
+
+          <div className="flex space-x-4">
+            {count < 3 ? (
+              <button
+                type="button"
+                onClick={nextStep}
+                className="px-8 py-2.5 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-md hover:shadow-lg transform active:scale-95 transition-all flex items-center"
+              >
+                Continue
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="9 5l7 7-7 7" />
+                </svg>
+              </button>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={() => reset(job)}
+                  className="px-6 py-2.5 border-2 border-gray-200 text-gray-600 rounded-xl font-bold hover:bg-gray-50 transition-all"
+                >
+                  Reset Changes
+                </button>
+                <button
+                  type="submit"
+                  className="px-8 py-2.5 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 shadow-md hover:shadow-lg transform active:scale-95 transition-all"
+                >
+                  Save Changes
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </form>
     </div>
