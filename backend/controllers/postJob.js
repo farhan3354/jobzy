@@ -18,6 +18,11 @@ export const createJob = async (req, res) => {
       applicationDeadline,
       contactEmail,
       contactPhone,
+      experienceLevel,
+      numberOfOpenings,
+      hiringTimeline,
+      schedule,
+      benefits,
     } = req.body;
 
     if (
@@ -31,7 +36,9 @@ export const createJob = async (req, res) => {
       !salary ||
       !skills ||
       !applicationDeadline ||
-      !contactEmail
+      !contactEmail ||
+      !experienceLevel ||
+      !numberOfOpenings
     ) {
       return res
         .status(400)
@@ -51,6 +58,11 @@ export const createJob = async (req, res) => {
       applicationDeadline,
       contactEmail,
       contactPhone,
+      experienceLevel,
+      numberOfOpenings,
+      hiringTimeline,
+      schedule,
+      benefits,
       status: "Active",
       postedBy: req.user.id,
     });
@@ -205,6 +217,11 @@ export const editjob = async (req, res) => {
       applicationDeadline,
       contactEmail,
       contactPhone,
+      experienceLevel,
+      numberOfOpenings,
+      hiringTimeline,
+      schedule,
+      benefits,
       status,
     } = req.body;
 
@@ -223,6 +240,11 @@ export const editjob = async (req, res) => {
         applicationDeadline,
         contactEmail,
         contactPhone,
+        experienceLevel,
+        numberOfOpenings,
+        hiringTimeline,
+        schedule,
+        benefits,
         status,
       },
       {

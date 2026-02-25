@@ -20,6 +20,11 @@ const jobSchema = new mongoose.Schema(
     applicationDeadline: { type: Date, required: true },
     contactEmail: { type: String, required: true },
     contactPhone: { type: String },
+    experienceLevel: { type: String, required: true },
+    numberOfOpenings: { type: Number, default: 1, required: true },
+    hiringTimeline: { type: String },
+    schedule: { type: [String], default: [] },
+    benefits: { type: [String], default: [] },
     status: {
       type: String,
       enum: ["Active", "Inactive", "Closed"],
